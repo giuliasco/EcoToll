@@ -45,21 +45,21 @@ public class MySQLDAOFactory extends DAOFactory {
 	    }
 
 	@Override
-	public DAOAutostrada getDAOAutostrada() {return new MySqlAutostrada();}
+	public DAOAutostrada getDAOAutostrada() {return new MySqlDAOAutostradaDAOimpl();}
 	@Override
-	public DAOCasello getDAOCasello() {return new MySqlCasello();}
+	public DAOCasello getDAOCasello() {return new MySqlDAOCaselloDAOimpl();}
 	@Override
-	public DAOClasseEU getDAOClasseEU() {return new MySqlClasseEU();}
+	public DAOClasseEU getDAOClasseEU() {return new MySqlDAOClasseEUDAOimpl();}
 	@Override
-	public DAOClasseIT getDAOClasseIT() {return new MySqlClasseIT();}
+	public DAOClasseIT getDAOClasseIT() {return new MySqlDAOClasseITDAOimpl();}
 	@Override
-	public DAONormativa getDAONormativa() {return new MySqlNormativa();}
+	public DAONormativa getDAONormativa() {return new MySqlDAONormativaDAOimpl();}
 	@Override
-	public DAORuolo getDAORuolo() {return new MySqlRuolo();}
+	public DAORuolo getDAORuolo() {return new MySqlDAORuoloDAOimpl();}
 	@Override
-	public DAOUtente getDAOUtente() {return new MySqlUtente();}
+	public DAOUtente getDAOUtente() {return new MySqlDAOUtenteDAOimpl();}
 	@Override
-	public DAOVeicolo getDAOVeicolo() {return new MySqlVeicolo();}
+	public DAOVeicolo getDAOVeicolo() {return new MySqlDAOVeicoloDAOimpl();}
 	
 	
 
