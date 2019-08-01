@@ -11,6 +11,7 @@ km double not null,
 tariffa_km decimal
 );
 
+
 create table casello(
 id int not null auto_increment primary key unique,
 nome_casello varchar(50) not null,
@@ -31,14 +32,6 @@ tipo varchar(50) not null,
 aggiunta double
 );
 
-create table veicolo(
-id int not null auto_increment primary key unique,
-targa varchar(50) not null,
-id_ci int not null,
-id_ceu int not null,
-constraint classeitaliana_veicolo foreign key(id_ci) references classe_italiana(id) on delete cascade on update cascade,
-constraint classeuropea_veicolo foreign key(id_ceu) references classe_europea(id) on delete cascade on update cascade
-);
 
 create table normativa(
 id int not null auto_increment primary key unique,
@@ -51,6 +44,7 @@ id int not null auto_increment primary key unique,
 tipo_utente varchar(50) not null
 );
 
+
 create table utente(
 id int not null auto_increment primary key unique,
 nome_utente varchar(50) not null,
@@ -60,6 +54,18 @@ pwd varchar(45) not null,
 id_ruolo int not null,
 constraint utente_ruolo foreign key(id_ruolo) references ruolo(id) on update cascade
 );
+
+create table veicolo(
+id int not null auto_increment primary key unique,
+targa varchar(50) not null,
+id_ci int not null,
+id_ceu int not null,
+id_utente int not null,
+constraint classeitaliana_veicolo foreign key(id_ci) references classe_italiana(id) on delete cascade on update cascade,
+constraint classeuropea_veicolo foreign key(id_ceu) references classe_europea(id) on delete cascade on update cascade,
+constraint utente_veicolo foreign key(id_utente) references utente(id) on delete cascade on update cascade
+);
+
 
 
  

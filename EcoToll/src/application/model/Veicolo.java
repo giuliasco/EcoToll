@@ -5,18 +5,19 @@ import java.sql.SQLException;
 
 public class Veicolo {
 
-	private int id,id_ci,id_ceu;
+	private int id,id_ci,id_ceu,id_utente;
 	private String targa;
 	
 	//Costruttore vuoto
 	public Veicolo() {}
 	
 	//Costruttore che prevede tutti i campi
-	public Veicolo(int id, int id_ci, int id_ceu, String targa) {
+	public Veicolo(int id, int id_ci, int id_ceu, int id_utente, String targa) {
 		this.id=id;
 		this.id_ci=id_ci;
 		this.id_ceu=id_ceu;
 		this.targa=targa;
+		this.id_utente=id_utente;
 	}
 	
 	 //costruttore da oggetto ResultSet (query DB)
@@ -25,6 +26,7 @@ public class Veicolo {
 	        this.setIdCi(resultSet.getInt("id_ci"));
 	        this.setIdCeu(resultSet.getInt("id_ceu"));
 	        this.setTarga(resultSet.getString("targa"));
+	        this.setIdUtente(resultSet.getInt("id_utente"));
 	 }
 	 
 	 
@@ -32,6 +34,9 @@ public class Veicolo {
 	
 	public int getId() {return id;}
 	public void setId(int id) {this.id=id;}
+	
+	public int getIdUtente() {return id_utente;}
+	public void setIdUtente(int id_utente) {this.id_utente=id_utente;}
 	
 
 	public int getIdCi() {return id_ci;}
