@@ -20,24 +20,30 @@ id_autostrada int not null,
 constraint autostrada_casello foreign key(id_autostrada) references autostrada(id) on delete cascade on update cascade
 );
 
-create table classe_europea(
-id int not null auto_increment primary key unique,
-tipo varchar(50) not null,
-aggiunta double
-);
-
-create table classe_italiana(
-id int not null auto_increment primary key unique,
-tipo varchar(50) not null,
-aggiunta double
-);
-
-
 create table normativa(
 id int not null auto_increment primary key unique,
 nome_normativa varchar(50),
 anno_normativa int(255)
 );
+
+create table classe_europea(
+id int not null auto_increment primary key unique,
+tipo varchar(50) not null,
+aggiunta double,
+id_normativa int not null,
+constraint classeEU_normativa foreign key (id_normativa) references normativa(id) on update cascade
+);
+
+create table classe_italiana(
+id int not null auto_increment primary key unique,
+tipo varchar(50) not null,
+aggiunta double,
+id_normativa int not null,
+constraint classeIT_normativa foreign key (id_normativa) references normativa(id) on update cascade
+);
+
+
+
 
 create table ruolo(
 id int not null auto_increment primary key unique,

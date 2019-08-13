@@ -7,12 +7,11 @@ import application.model.ClasseIT;
 
 	public interface DAOClasseIT {
 	
-	public List<ClasseIT> getAllClasseIT();
+	public List<String> getAllClasseIT();
 	
-	public ClasseIT getClasseIT(String tipo);
+	public ClasseIT getClasseIT(int id_normativa);
 			
-	public boolean addClasseIT(ClasseIT classe_it);
-		
-	public boolean deleteClasseIT(ClasseIT classe_it );
+	public boolean addClasseIT(String tipo, double aggiunta, int id_normativa);
+
 
 }

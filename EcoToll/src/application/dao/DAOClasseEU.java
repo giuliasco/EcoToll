@@ -7,12 +7,12 @@ import application.model.ClasseEU;
 
 	public interface DAOClasseEU {
 	
-	public List<ClasseEU> getAllClasseEU();
+	public List<String> getAllClasseEU();
 	
-	public ClasseEU getClasseEU(String tipo);
 			
-	public boolean addClasseEU(ClasseEU classe_eu);
-		
-	public boolean deleteClasseEU(ClasseEU classe_eu );
+	public boolean addClasseEU(String tipo, double aggiunta, int id_normativa);
+	
+	public ClasseEU getClasseEU(int id_normativa);
+			
 
 }
