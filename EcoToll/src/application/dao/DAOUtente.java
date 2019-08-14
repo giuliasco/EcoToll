@@ -5,9 +5,18 @@ import application.model.Utente;
 
 public interface DAOUtente {
 	
-	public List <Utente> getAllUtenti();
-	public boolean addUtente(Utente utente);
-	public boolean deleteUtente(Utente utente);
-	public Utente getUtente(String username, String password);
+	public List<String> getAllUtenti();
+	
+	public boolean registraUtente(String nome_utente, String cognome_utente, String email, String pwd, int id_ruolo);
+	
+	public boolean deleteUtente(String email);
+	
+	public Utente getUtente(String email, String pwd);
+	
+	public boolean Login(String email, String pwd);
+	
+	public void updateRuoloUtente (String email);
+	
+	
 
 }

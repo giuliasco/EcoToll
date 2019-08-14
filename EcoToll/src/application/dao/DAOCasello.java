@@ -12,7 +12,7 @@ public interface DAOCasello {
 		public Casello getCasello(int id);
 				
 		public boolean addCasello(String nome_casello,double alezza_km, int id_autostrada);
-			
-
+		
+		public boolean deleteCasello(String nome_casello);
 
 }

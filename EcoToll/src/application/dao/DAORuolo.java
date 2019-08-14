@@ -1,13 +1,12 @@
 package application.dao;
 
 import java.util.List;
-import application.model.Ruolo;
 
 public interface DAORuolo {
 	
-	public List<Ruolo> getAllRuoli();
-	public boolean addRuolo(Ruolo ruolo);
-	public Ruolo getRuolo(String tipo_utente);
+	public List<String> getAllRuoli();
+	public boolean addRuolo(String tipo_utente);
+	
 	
 
 }

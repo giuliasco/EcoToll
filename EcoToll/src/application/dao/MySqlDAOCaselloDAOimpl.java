@@ -20,7 +20,7 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 	private final String EXIT = "SELECT * FROM casello";
 	private final String ADD_CASELLO = "INSERT INTO casello (nome_casello, altezza_km,id_autostrada) VALUES (?,?,?)";
 	private final String SELECT_INFOCASELLO = "SELECT * FROM casello WHERE id=?";
-
+	private final String DELETE_CASELLO= "DELETE FROM casello WHERE nome_casello=?";
 
 		@Override
 		public List<String> getAllCasello(){
@@ -31,7 +31,7 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 				 
 				  res = prep.executeQuery();
 				  while(res.next()) {
-					  list.add(res.getString(1) +" " + res.getString(2) );
+					  list.add(res.getString(1));
 				  }
 		}
 			catch (SQLException e) {
@@ -65,6 +65,21 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 	}
 	
 
+	public boolean deleteCasello(String nome_casello) {
+		try {
+			  con = MySQLDAOFactory.createConnection();
+			  prep = (PreparedStatement) con.prepareStatement(DELETE_CASELLO);
+			  prep.setString(1, nome_casello);
+			return prep.execute();
+		} catch (SQLException e) {
+			e.printStackTrace(); 
+			System.out.println("Problema nel DB");
+			return false;
+			}
+		
+	}
+	
+
 	
 	@Override
 	public Casello getCasello(int id) {
@@ -84,6 +99,5 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 	
 		return null;
 	}
-
 
 }

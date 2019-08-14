@@ -73,7 +73,7 @@ public class MySqlDAOAutostradaDAOimpl implements DAOAutostrada {
 			 
 			  res = prep.executeQuery();
 			  while(res.next()) {
-				  list.add(res.getString(1) +" " + res.getString(2) );
+				  list.add(res.getString(1));
 			  }
 	}
 		catch (SQLException e) {

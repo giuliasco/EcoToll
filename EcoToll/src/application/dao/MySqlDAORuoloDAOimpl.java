@@ -7,23 +7,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-public class MySqlDAONormativaDAOimpl implements DAONormativa {
-	
+public class MySqlDAORuoloDAOimpl implements DAORuolo{
 	private Connection con = null;
 	private PreparedStatement prep=null;
 	private ResultSet res = null;
 	
-	private final String NORMATIVA = "SELECT * FROM normativa";
-	private final String ADD_NORMATIVA = "INSERT INTO normativa(nome_normativa, anno_normativa) VALUES (?,?)";
-
+	private final String ROLES= "SELECT * FROM ruolo";
+	private final String ADD_RUOLO = "INSERT INTO ruolo(tipo_utente) VALUES (?)";
+	
 	@Override
-	public List<String> getAllNormative() {
+	public List<String> getAllRuoli() {
 		List<String> list = new ArrayList<String>();
 		try {
 			  con = MySQLDAOFactory.createConnection();
-			  prep = (PreparedStatement) con.prepareStatement(NORMATIVA);
+			  prep = (PreparedStatement) con.prepareStatement(ROLES);
 			 
 			  res = prep.executeQuery();
 			  while(res.next()) {
@@ -38,13 +35,11 @@ public class MySqlDAONormativaDAOimpl implements DAONormativa {
 	}
 
 	@Override
-	public boolean addNormativa(int anno_normativa,String nome_normativa) {
+	public boolean addRuolo(String tipo_utente) {
 		try {
 			con = MySQLDAOFactory.createConnection();
-			prep = (PreparedStatement) con.prepareStatement(ADD_NORMATIVA);
-			prep.setString(1, nome_normativa);
-			prep.setDouble(2, anno_normativa);
-	
+			prep = (PreparedStatement) con.prepareStatement(ADD_RUOLO);
+			prep.setString(1, tipo_utente);
 			return prep.execute();
 		}
 		catch (Exception e) {

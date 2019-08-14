@@ -55,7 +55,7 @@ create table utente(
 id int not null auto_increment primary key unique,
 nome_utente varchar(50) not null,
 cognome_utente varchar(50) not null,
-username varchar(50) not null unique,
+email varchar(50) not null unique,
 pwd varchar(45) not null,
 id_ruolo int not null,
 constraint utente_ruolo foreign key(id_ruolo) references ruolo(id) on update cascade
