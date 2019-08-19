@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.model.Normativa;
+
 
 
 public class MySqlDAONormativaDAOimpl implements DAONormativa {
@@ -19,15 +21,19 @@ public class MySqlDAONormativaDAOimpl implements DAONormativa {
 	private final String ADD_NORMATIVA = "INSERT INTO normativa(nome_normativa, anno_normativa) VALUES (?,?)";
 
 	@Override
-	public List<String> getAllNormative() {
-		List<String> list = new ArrayList<String>();
+	public List<Normativa> getAllNormative() {
+		List<Normativa> list = new ArrayList<>();
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(NORMATIVA);
 			 
 			  res = prep.executeQuery();
 			  while(res.next()) {
-				  list.add(res.getString(1));
+				  Normativa normativa = new Normativa();
+				  normativa.setId(res.getInt("id"));
+				  normativa.setAnnoNormativa(res.getInt("anno_normativa"));
+				  normativa.setNomeNormativa(res.getString("nome_normativa"));
+				  list.add(normativa);
 			  }
 	}
 		catch (SQLException e) {
@@ -38,12 +44,12 @@ public class MySqlDAONormativaDAOimpl implements DAONormativa {
 	}
 
 	@Override
-	public boolean addNormativa(int anno_normativa,String nome_normativa) {
+	public boolean addNormativa(Normativa n) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(ADD_NORMATIVA);
-			prep.setString(1, nome_normativa);
-			prep.setDouble(2, anno_normativa);
+			prep.setString(1, n.getNomeNormativa());
+			prep.setDouble(2, n.getAnnoNormativa());
 	
 			return prep.execute();
 		}

@@ -2,13 +2,15 @@ package application.dao;
 
 import java.util.List;
 
+import application.model.Normativa;
+
 
 
 public interface DAONormativa {
 	
-	public List<String> getAllNormative();
+	public List<Normativa> getAllNormative();
 	
-	public boolean addNormativa(int anno_normativa,String nome_normativa);
+	public boolean addNormativa(Normativa n);
 
 	
 

@@ -25,14 +25,20 @@ public class MySqlDAOVeicoloDAOimpl implements DAOVeicolo {
 	
 
 	@Override
-	public List<String> getAllVeicoli() {
-		List<String> list = new ArrayList<String>();
+	public List<Veicolo> getAllVeicoli() {
+		List<Veicolo> list = new ArrayList<>();
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(SHOW_VEICOLI);
 			  res = prep.executeQuery();
 			  while(res.next()) {
-				  list.add(res.getString(1));
+				  Veicolo veicolo= new Veicolo();
+				  veicolo.setId(res.getInt("id"));
+				  veicolo.setIdCi(res.getInt("id_ci"));
+				  veicolo.setIdCeu(res.getInt("id_ceu"));
+				  veicolo.setTarga(res.getString("targa"));
+				  veicolo.setIdUtente(res.getInt("id_utente"));
+				  list.add(veicolo);
 			  }
 	}
 		catch (SQLException e) {
@@ -43,11 +49,11 @@ public class MySqlDAOVeicoloDAOimpl implements DAOVeicolo {
 	}
 
 	@Override
-	public Veicolo getVeicolo(int id) {
+	public Veicolo getVeicolo(Veicolo v) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(SHOW_INFO);
-			prep.setInt(1, id);
+			prep.setInt(1, v.getId());
 			res = prep.executeQuery();
 			res.next();
 			return new Veicolo(res);
@@ -61,14 +67,14 @@ public class MySqlDAOVeicoloDAOimpl implements DAOVeicolo {
 	}
 
 	@Override
-	public boolean addVeicolo(String targa, int id_ci, int id_ceu, int id_utente) {
+	public boolean addVeicolo(Veicolo v) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(ADD_VEICOLO);
-			prep.setString(1, targa);
-			prep.setInt(2, id_ci);
-			prep.setInt(3, id_ceu);
-			prep.setInt(4, id_utente);
+			prep.setString(1, v.getTarga());
+			prep.setInt(2, v.getIdCi());
+			prep.setInt(3, v.getIdCeu());
+			prep.setInt(4, v.getIdUtente());
 			return prep.execute();
 		}
 		catch (Exception e) {
@@ -78,11 +84,11 @@ public class MySqlDAOVeicoloDAOimpl implements DAOVeicolo {
 	}
 
 	
-	public boolean deleteVeicolo(String targa) {
+	public boolean deleteVeicolo(Veicolo v) {
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(DELETE_VEICOLO	);
-			  prep.setString(1, targa );
+			  prep.setString(1, v.getTarga() );
 			return prep.execute();
 		} catch (SQLException e) {
 			e.printStackTrace(); 
@@ -94,11 +100,11 @@ public class MySqlDAOVeicoloDAOimpl implements DAOVeicolo {
 
 
 	@Override
-	public void updateClassIT(String targa) {
+	public void updateClassIT(Veicolo v) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(UPDATE_CLASSIT);
-	 		prep.setString(1, targa);
+	 		prep.setString(1, v.getTarga());
 	 		prep.executeUpdate();
 
 			}
@@ -111,11 +117,11 @@ public class MySqlDAOVeicoloDAOimpl implements DAOVeicolo {
 	}
 
 	@Override
-	public void updateClassEU(String targa) {
+	public void updateClassEU(Veicolo v) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(UPDATE_CLASSEU);
-	 		prep.setString(1, targa);
+	 		prep.setString(1, v.getTarga());
 	 		prep.executeUpdate();
 
 			}

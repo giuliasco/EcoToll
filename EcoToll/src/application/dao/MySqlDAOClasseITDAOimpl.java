@@ -22,15 +22,21 @@ public class MySqlDAOClasseITDAOimpl implements DAOClasseIT{
 
 
 	@Override
-	public List<String> getAllClasseIT() {
-		List<String> list = new ArrayList<String>();
+	public List<ClasseIT> getAllClasseIT() {
+		List<ClasseIT> list = new ArrayList<>();
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(CLASS_IT);
 			 
 			  res = prep.executeQuery();
 			  while(res.next()) {
-				  list.add(res.getString(1));
+				  ClasseIT classeit= new ClasseIT();
+				  classeit.setId(res.getInt("id"));
+				  classeit.setIdNormativa(res.getInt("id_normativa"));
+				  classeit.setAggiunta(res.getDouble("aggiunta"));
+				  classeit.setTipo(res.getString("tipo"));
+				  
+				  list.add(classeit);
 			  }
 	}
 		catch (SQLException e) {
@@ -41,11 +47,11 @@ public class MySqlDAOClasseITDAOimpl implements DAOClasseIT{
 	}
 
 	@Override
-	public ClasseIT getClasseIT(int id_normativa) {
+	public ClasseIT getClasseIT(ClasseIT it) {
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(SELECT_CLASSITFROMIDNORMATIVA);
-			  prep.setInt(1, id_normativa);
+			  prep.setInt(1, it.getIdNormativa());
 			  res = prep.executeQuery();
 			  if(res.next()) {
 				  return new ClasseIT(res);
@@ -60,13 +66,13 @@ public class MySqlDAOClasseITDAOimpl implements DAOClasseIT{
 	}
 
 	@Override
-	public boolean addClasseIT(String tipo, double aggiunta, int id_normativa) {
+	public boolean addClasseIT(ClasseIT it) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(ADD_CLASSIT);
-			prep.setString(1, tipo);
-			prep.setDouble(2, aggiunta);
-			prep.setInt(3, id_normativa);
+			prep.setString(1, it.getTipo());
+			prep.setDouble(2, it.getAggiunta());
+			prep.setInt(3, it.getIdNormativa());
 			
 			
 			return prep.execute();

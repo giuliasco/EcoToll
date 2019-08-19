@@ -6,17 +6,17 @@ import application.model.Veicolo;
 
 public interface DAOVeicolo {
 	
-	public List<String> getAllVeicoli();
+	public List<Veicolo> getAllVeicoli();
 
-	public Veicolo getVeicolo(int id);
+	public Veicolo getVeicolo(Veicolo v);
 			
-	public boolean addVeicolo(String targa,int id_ci, int id_ceu, int id_utente);
+	public boolean addVeicolo(Veicolo v);
 		
-	public boolean deleteVeicolo(String targa );
+	public boolean deleteVeicolo(Veicolo v);
 	
 	
-	public void updateClassIT (String targa);
+	public void updateClassIT (Veicolo v);
 	
-	public void updateClassEU (String targa);
+	public void updateClassEU (Veicolo v);
 	
 }

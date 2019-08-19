@@ -21,17 +21,23 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 	private final String ADD_CASELLO = "INSERT INTO casello (nome_casello, altezza_km,id_autostrada) VALUES (?,?,?)";
 	private final String SELECT_INFOCASELLO = "SELECT * FROM casello WHERE id=?";
 	private final String DELETE_CASELLO= "DELETE FROM casello WHERE nome_casello=?";
+	private final String UPDATE_CASELLO="UPDATE casello SET nome_casello=? OR altezza_km=? WHERE id=?";
 
 		@Override
-		public List<String> getAllCasello(){
-			List<String> list = new ArrayList<String>();
+		public List<Casello> getAllCasello(){
+			List<Casello> list = new ArrayList<>();
 			try {
 				  con = MySQLDAOFactory.createConnection();
 				  prep = (PreparedStatement) con.prepareStatement(EXIT);
 				 
 				  res = prep.executeQuery();
 				  while(res.next()) {
-					  list.add(res.getString(1));
+					  Casello casello=new Casello();
+					  casello.setId(res.getInt("id"));
+					  casello.setIdAutostrada(res.getInt("id_autostrada"));
+					  casello.setAltezzaKm(res.getDouble("altezza_km"));
+					  casello.setNomeCasello(res.getString("nome_casello"));
+					  list.add(casello);
 				  }
 		}
 			catch (SQLException e) {
@@ -46,13 +52,13 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 
 
 	@Override
-	public boolean addCasello(String nome_casello,double altezza_km, int id_autostrada) {
+	public boolean addCasello(Casello c) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(ADD_CASELLO);
-			prep.setString(1, nome_casello);
-			prep.setDouble(2, altezza_km);
-			prep.setInt(3, id_autostrada);
+			prep.setString(1, c.getNomeCasello());
+			prep.setDouble(2, c.getAltezzaKm());
+			prep.setInt(3, c.getIdAutostrada());
 			
 			
 			return prep.execute();
@@ -65,11 +71,11 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 	}
 	
 
-	public boolean deleteCasello(String nome_casello) {
+	public boolean deleteCasello(Casello c) {
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(DELETE_CASELLO);
-			  prep.setString(1, nome_casello);
+			  prep.setString(1, c.getNomeCasello());
 			return prep.execute();
 		} catch (SQLException e) {
 			e.printStackTrace(); 
@@ -82,11 +88,11 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 
 	
 	@Override
-	public Casello getCasello(int id) {
+	public Casello getCasello(Casello c) {
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(SELECT_INFOCASELLO);
-			  prep.setInt(1, id);
+			  prep.setInt(1, c.getId());
 			  res = prep.executeQuery();
 			  if(res.next()) {
 				  return new Casello(res);
@@ -98,6 +104,26 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 		}
 	
 		return null;
+	}
+
+
+
+
+	@Override
+	public void updateCasello(Casello c) {
+		try {
+			con = MySQLDAOFactory.createConnection();
+			prep = (PreparedStatement) con.prepareStatement(UPDATE_CASELLO);
+	 		prep.setInt(1, c.getId());
+	 		prep.executeUpdate();
+
+			}
+			catch(SQLException e) {
+				e.printStackTrace(); 
+				System.out.println("Problema nel DB");
+				
+			}
+		
 	}
 
 }

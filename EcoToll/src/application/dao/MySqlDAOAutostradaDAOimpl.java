@@ -24,15 +24,15 @@ public class MySqlDAOAutostradaDAOimpl implements DAOAutostrada {
 	
 	
 	@Override
-	public boolean addAutostrada(String nome_autostrada, String inizio, String fine, double km, double tariffa_km) {
+	public boolean addAutostrada(Autostrada a) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(INSERT_AUTOSTRADA);
-			prep.setString(1, nome_autostrada);
-			prep.setString(2, inizio);
-			prep.setString(3, fine);
-			prep.setDouble(4, km);
-			prep.setDouble(5, tariffa_km);
+			prep.setString(1, a.getNomeAutostrada());
+			prep.setString(2, a.getInizio());
+			prep.setString(3, a.getFine());
+			prep.setDouble(4, a.getKm());
+			prep.setDouble(5, a.getTariffaKm());
 			
 			return prep.execute();
 		}
@@ -43,11 +43,11 @@ public class MySqlDAOAutostradaDAOimpl implements DAOAutostrada {
 	}
 	
 	@Override
-	public int getIdAutostrada (String nome_autostrada) {
+	public int getIdAutostrada (Autostrada a) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(SELECT_INFO_AUTOSTRADA);
-			prep.setString(1, nome_autostrada);
+			prep.setString(1, a.getNomeAutostrada());
 			res = prep.executeQuery();
 			if (res.next()){
 			   return res.getInt(1);
@@ -65,15 +65,22 @@ public class MySqlDAOAutostradaDAOimpl implements DAOAutostrada {
 	
 	
 	@Override
-	public List<String> getAllAutostrade(){
-		List<String> list = new ArrayList<String>();
+	public List<Autostrada> getAllAutostrade(){
+		List<Autostrada> list = new ArrayList<>();
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(HIGHWAY);
 			 
 			  res = prep.executeQuery();
 			  while(res.next()) {
-				  list.add(res.getString(1));
+				  Autostrada autostrada = new Autostrada();
+				  	autostrada.setId(res.getInt("id"));
+				  	autostrada.setKm(res.getDouble("km"));
+				  	autostrada.setTariffaKm(res.getDouble("tariffa_km"));
+				  	autostrada.setNomeAutostrada(res.getString("nome_autostrada"));
+				  	autostrada.setInizio(res.getString("inizio"));
+				  	autostrada.setFine(res.getString("fine"));
+					list.add(autostrada);
 			  }
 	}
 		catch (SQLException e) {
@@ -86,11 +93,11 @@ public class MySqlDAOAutostradaDAOimpl implements DAOAutostrada {
 	
 	
 	@Override
-	public Autostrada getAutostrada(String nome_autostrada) {
+	public Autostrada getAutostrada(Autostrada a) {
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(SELECT_INFO_AUTOSTRADA);
-			  prep.setString(1, nome_autostrada);
+			  prep.setString(1, a.getNomeAutostrada());
 			  res = prep.executeQuery();
 			  if(res.next()) {
 				  return new Autostrada(res);

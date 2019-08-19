@@ -22,15 +22,20 @@ public class MySqlDAOClasseEUDAOimpl implements DAOClasseEU {
 
   
 	@Override
-	public List<String> getAllClasseEU() {
-		List<String> list = new ArrayList<String>();
+	public List<ClasseEU> getAllClasseEU() {
+		List<ClasseEU> list = new ArrayList<>();
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(CLASS_EU);
 			 
 			  res = prep.executeQuery();
 			  while(res.next()) {
-				  list.add(res.getString(1));
+				  ClasseEU classeeu=new ClasseEU();
+				  classeeu.setId(res.getInt("id"));
+				  classeeu.setIdNormativa(res.getInt("id_normativa"));
+				  classeeu.setAggiunta(res.getDouble("aggiunta"));
+				  classeeu.setTipo(res.getString("tipo"));
+				  list.add(classeeu);
 			  }
 	}
 		catch (SQLException e) {
@@ -42,13 +47,13 @@ public class MySqlDAOClasseEUDAOimpl implements DAOClasseEU {
 
 
 	@Override
-	public boolean addClasseEU(String tipo, double aggiunta, int id_normativa) {
+	public boolean addClasseEU(ClasseEU eu) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(ADD_CLASSEU);
-			prep.setString(1, tipo);
-			prep.setDouble(2, aggiunta);
-			prep.setInt(3, id_normativa);
+			prep.setString(1, eu.getTipo());
+			prep.setDouble(2, eu.getAggiunta());
+			prep.setInt(3, eu.getIdNormativa());
 			
 			
 			return prep.execute();
@@ -60,11 +65,11 @@ public class MySqlDAOClasseEUDAOimpl implements DAOClasseEU {
 	}
 
 	@Override
-	public ClasseEU getClasseEU(int id_normativa) {
+	public ClasseEU getClasseEU(ClasseEU eu) {
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(SELECT_CLASSEUFROMIDNORMATIVA);
-			  prep.setInt(1, id_normativa);
+			  prep.setInt(1, eu.getIdNormativa());
 			  res = prep.executeQuery();
 			  if(res.next()) {
 				  return new ClasseEU(res);

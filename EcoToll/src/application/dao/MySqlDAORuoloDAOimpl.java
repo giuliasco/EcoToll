@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.model.Ruolo;
+
 public class MySqlDAORuoloDAOimpl implements DAORuolo{
 	private Connection con = null;
 	private PreparedStatement prep=null;
@@ -16,15 +18,19 @@ public class MySqlDAORuoloDAOimpl implements DAORuolo{
 	private final String ADD_RUOLO = "INSERT INTO ruolo(tipo_utente) VALUES (?)";
 	
 	@Override
-	public List<String> getAllRuoli() {
-		List<String> list = new ArrayList<String>();
+	public List<Ruolo> getAllRuoli() {
+		List<Ruolo> list = new ArrayList<>();
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(ROLES);
 			 
 			  res = prep.executeQuery();
 			  while(res.next()) {
-				  list.add(res.getString(1));
+				  Ruolo ruolo=new Ruolo();
+				  ruolo.setId(res.getInt("id"));
+				  ruolo.setTipoUtente(res.getString("tipo_utente"));
+				  
+				  list.add(ruolo);
 			  }
 	}
 		catch (SQLException e) {
@@ -35,11 +41,11 @@ public class MySqlDAORuoloDAOimpl implements DAORuolo{
 	}
 
 	@Override
-	public boolean addRuolo(String tipo_utente) {
+	public boolean addRuolo(Ruolo r) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(ADD_RUOLO);
-			prep.setString(1, tipo_utente);
+			prep.setString(1, r.getTipoUtente());
 			return prep.execute();
 		}
 		catch (Exception e) {

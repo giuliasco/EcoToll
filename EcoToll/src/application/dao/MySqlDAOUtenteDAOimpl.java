@@ -23,21 +23,21 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 	private static final String DELETE_UTENTE="DELETE FROM utente WHERE email=?";
 	private static final String SHOW_ANAG="SELECT nome_utente,cognome_utente,email,pwd,targa FROM utente, veicolo WHERE utente.id=veicolo.id_utente AND email=? AND pwd=?;";
 	private static final String LOG_IN="SELECT * FROM utente WHERE email=? AND pwd=?";
-	private static final String UPDATE_ROLE_TO_ADMIN="UPDATE utente SET id_ruolo=? WHERE email=?";
+	private static final String UPDATE_ROLE_TO_ADMIN="UPDATE utente SET id_ruolo=? OR email=? OR pwd=? WHERE email=?";
 	
 
 
 	
 	@Override
-	public boolean registraUtente(String nome_utente, String cognome_utente, String email, String pwd, int id_ruolo) {
+	public boolean registraUtente(Utente u) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(REGISTER_UTENTE);
-			prep.setString(1, nome_utente);
-			prep.setString(2, cognome_utente);
-			prep.setString(3, email);
-			prep.setString(4, pwd);
-			prep.setInt(5, id_ruolo);
+			prep.setString(1, u.getNomeUtente());
+			prep.setString(2, u.getCognomeUtente());
+			prep.setString(3, u.getEmail());
+			prep.setString(4, u.getPwd());
+			prep.setInt(5, u.getIdRuolo());
 			return prep.execute();
 		}
 		catch (Exception e) {
@@ -47,11 +47,11 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 	}
 
 
-	public boolean deleteUtente(String email) {
+	public boolean deleteUtente(Utente u) {
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(DELETE_UTENTE);
-			  prep.setString(1, email );
+			  prep.setString(1, u.getEmail() );
 			return prep.execute();
 		} catch (SQLException e) {
 			e.printStackTrace(); 
@@ -61,12 +61,12 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 	}
 
 	@Override
-	public Utente getUtente(String email, String pwd) {
+	public Utente getUtente(Utente u) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(SHOW_ANAG);
-			prep.setString(1, email);
-			prep.setString(2, pwd);
+			prep.setString(1, u.getEmail());
+			prep.setString(2, u.getPwd());
 			res = prep.executeQuery();
 			res.next();
 			return new Utente(res);
@@ -80,13 +80,13 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 	}
 
 	@Override
-	public boolean Login(String email, String pwd) {
+	public boolean Login(Utente u) {
 		
 		  try {
 		  con = MySQLDAOFactory.createConnection();
 		  prep = (PreparedStatement) con.prepareStatement(LOG_IN);
-		  prep.setString(1, email);
-		  prep.setString(2,pwd);
+		  prep.setString(1, u.getEmail());
+		  prep.setString(2,u.getPwd());
 		  res = prep.executeQuery(); 
 		  
 		  if (res.next()) {
@@ -99,11 +99,11 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 	}
 
 	@Override
-	public void updateRuoloUtente(String email) {
+	public void updateRuoloUtente(Utente u) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(UPDATE_ROLE_TO_ADMIN);
-	 		prep.setString(1, email);
+	 		prep.setString(1, u.getEmail());
 	 		prep.executeUpdate();
 
 			}
@@ -116,14 +116,21 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 	}
 
 	@Override
-	public List<String> getAllUtenti() {
-		List<String> list = new ArrayList<String>();
+	public List<Utente> getAllUtenti() {
+		List<Utente> list = new ArrayList<>();
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(SHOW_USER);
 			  res = prep.executeQuery();
 			  while(res.next()) {
-				  list.add(res.getString(1));
+				  Utente utente = new Utente();
+				  utente.setId(res.getInt("id"));
+				  utente.setIdRuolo(res.getInt("id_ruolo"));
+				  utente.setNomeUtente(res.getString("nome_utente"));
+				  utente.setCognomeUtente(res.getString("cognome_utente"));
+				  utente.setEmail(res.getString("email"));
+				  utente.setPwd(res.getString("pwd"));
+				  list.add(utente);
 			  }
 	}
 		catch (SQLException e) {

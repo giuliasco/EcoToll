@@ -7,12 +7,14 @@ import application.model.Casello;
 
 public interface DAOCasello {
 	
-		public List<String> getAllCasello();
+		public List<Casello> getAllCasello();
 	
-		public Casello getCasello(int id);
+		public Casello getCasello(Casello c);
 				
-		public boolean addCasello(String nome_casello,double alezza_km, int id_autostrada);
+		public boolean addCasello(Casello c);
 		
-		public boolean deleteCasello(String nome_casello);
+		public boolean deleteCasello(Casello c);
+		
+		public void updateCasello(Casello c);
 
 }
