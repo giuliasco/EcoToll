@@ -11,9 +11,9 @@ public interface DAOUtente {
 	
 	public boolean deleteUtente(Utente u);
 	
-	public Utente getUtente(Utente u);
+	public Utente getUtente(String email, String pwd);
 	
-	public boolean Login(Utente u);
+	public boolean Login(String email, String pwd);
 	
 	public void updateRuoloUtente (Utente u);
 	

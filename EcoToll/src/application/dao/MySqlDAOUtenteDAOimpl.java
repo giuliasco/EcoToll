@@ -61,12 +61,12 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 	}
 
 	@Override
-	public Utente getUtente(Utente u) {
+	public Utente getUtente(String email, String pwd) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(SHOW_ANAG);
-			prep.setString(1, u.getEmail());
-			prep.setString(2, u.getPwd());
+			prep.setString(1, email);
+			prep.setString(2, pwd);
 			res = prep.executeQuery();
 			res.next();
 			return new Utente(res);
@@ -80,13 +80,13 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 	}
 
 	@Override
-	public boolean Login(Utente u) {
+	public boolean Login(String email, String pwd) {
 		
 		  try {
 		  con = MySQLDAOFactory.createConnection();
 		  prep = (PreparedStatement) con.prepareStatement(LOG_IN);
-		  prep.setString(1, u.getEmail());
-		  prep.setString(2,u.getPwd());
+		  prep.setString(1, email);
+		  prep.setString(2, pwd);
 		  res = prep.executeQuery(); 
 		  
 		  if (res.next()) {
