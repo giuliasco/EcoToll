@@ -17,8 +17,5 @@ public interface DAOUtente {
 	
 	public void updateRuoloUtente (Utente u);
 	
-
 	
-	
-
-}
+	}

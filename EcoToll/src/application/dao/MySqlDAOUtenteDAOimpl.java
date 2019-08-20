@@ -19,9 +19,9 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 	private ResultSet res = null;
 	
 	private static final String SHOW_USER="SELECT * FROM utente";
-	private static final String REGISTER_UTENTE="INSERT INTO utente(nome_utente,cognome_utente,email,pwd,id_ruolo) VALUES (?,?,?,?,?)";
+	private static final String REGISTER_UTENTE="INSERT INTO utente(nome_utente,cognome_utente,email,pwd,id_ruolo) VALUES (?,?,?,?,1)";
 	private static final String DELETE_UTENTE="DELETE FROM utente WHERE email=?";
-	private static final String SHOW_ANAG="SELECT nome_utente,cognome_utente,email,pwd,targa FROM utente, veicolo WHERE utente.id=veicolo.id_utente AND email=? AND pwd=?;";
+	private static final String SHOW_ANAG="SELECT * FROM utente WHERE email=? AND pwd=?;";
 	private static final String LOG_IN="SELECT * FROM utente WHERE email=? AND pwd=?";
 	private static final String UPDATE_ROLE_TO_ADMIN="UPDATE utente SET id_ruolo=? OR email=? OR pwd=? WHERE email=?";
 	
@@ -60,6 +60,7 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 			}
 	}
 
+	@Override
 	public Utente getUtente(String email, String pwd) {
 		try {
 			con = MySQLDAOFactory.createConnection();
@@ -67,24 +68,28 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 			prep.setString(1, email);
 			prep.setString(2, pwd);
 			res = prep.executeQuery();
+			res.next();
+			//Utente u= new Utente(res);
+			//return u;
 			
-			if(res.next()) {
-				Utente utente1 = new Utente(res);
-				Utente a = Utente.getIstance();
-				a.setglobal(utente1);
-				}			
-			
-			
-		}
+			 Utente utente1 = new Utente(res);
+			 Utente a = Utente.getIstance();
+			 a.setglobal(utente1);
+			/*if (res.next()) {
+				 Utente utente1 = new Utente(res);
+				 Utente a = Utente.getIstance();
+				 a.setglobal(utente1);
+				  
+			  }*/
+			 return a;
+			}
 		catch(SQLException e) {
 			e.printStackTrace(); 
 			System.out.println("Problema nel DB");
 			
 		}
+		
 		return null;
-		
-		
-		
 	}
 
 	@Override

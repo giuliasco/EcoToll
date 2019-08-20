@@ -22,9 +22,9 @@ public class LoginManager {
 		return false;
 	}
 	 
-	public Utente setUserGlobal(String email, String pwd) {
+	public void setUserGlobal(String email, String pwd) {
 		userdao.getUtente(email, pwd);
-		return new Utente();
+		
 	
 	}
 	/**
