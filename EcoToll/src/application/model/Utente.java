@@ -3,11 +3,20 @@ package application.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+
 public class Utente {
 	
 	private int id, id_ruolo;
 	private String nome_utente, cognome_utente,email,pwd;
 	
+	 private static Utente instance = null;
+	
+    public static Utente getIstance() {
+        if(instance==null)
+                instance = new Utente();
+        return instance;
+}
 	//costruttore vuoto
 	public Utente() {}
 	
@@ -49,6 +58,10 @@ public class Utente {
 	
 	public String getPwd() {return pwd;}
 	public void setPwd(String pwd) {this.pwd= pwd;}
+	
+	 public void setglobal(Utente user1) {
+	    	instance = user1;
+	    }
 	
 	}
 	
