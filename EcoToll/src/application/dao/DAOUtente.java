@@ -11,11 +11,13 @@ public interface DAOUtente {
 	
 	public boolean deleteUtente(Utente u);
 	
-	public void getUtente(String email, String pwd);
+	public  Utente getUtente(String email, String pwd);
 	
 	public boolean Login(String email, String pwd);
 	
 	public void updateRuoloUtente (Utente u);
+	
+
 	
 	
 

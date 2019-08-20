@@ -60,8 +60,7 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 			}
 	}
 
-	@Override
-	public void getUtente(String email, String pwd) {
+	public Utente getUtente(String email, String pwd) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(SHOW_ANAG);
@@ -73,7 +72,8 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 				Utente utente1 = new Utente(res);
 				Utente a = Utente.getIstance();
 				a.setglobal(utente1);
-			}
+				}			
+			
 			
 		}
 		catch(SQLException e) {
@@ -81,6 +81,9 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 			System.out.println("Problema nel DB");
 			
 		}
+		return null;
+		
+		
 		
 	}
 
@@ -144,4 +147,7 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 		}
 		return list;
 	}
+
+
+
 }

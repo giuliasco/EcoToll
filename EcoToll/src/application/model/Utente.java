@@ -59,8 +59,8 @@ public class Utente {
 	public String getPwd() {return pwd;}
 	public void setPwd(String pwd) {this.pwd= pwd;}
 	
-	 public void setglobal(Utente user1) {
-	    	instance = user1;
+	 public void setglobal(Utente utente1) {
+	    	instance = utente1;
 	    }
 	
 	}

@@ -24,8 +24,8 @@ public class LoginManager {
 	 
 	public Utente setUserGlobal(String email, String pwd) {
 		userdao.getUtente(email, pwd);
-		Utente u= new Utente();
-		return u;
+		return new Utente();
+	
 	}
 	/**
 	 * verifica che lo user esiste

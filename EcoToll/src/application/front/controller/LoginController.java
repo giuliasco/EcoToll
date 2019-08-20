@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.controller.LoginManager;
+import application.dao.DAOUtente;
 import application.model.Utente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +27,8 @@ public class LoginController{
 	@FXML private TextField password;
 	
 	private LoginManager loginManager = new LoginManager();
-	Utente u = new Utente();
+	 Utente utente = new Utente();
+
 	
 	
 /**
@@ -53,9 +55,14 @@ public class LoginController{
 	@FXML
 	public void login (ActionEvent evt) throws IOException {
 			
-		if (loginManager.login(email.getText(), password.getText())) {			
-			u=loginManager.setUserGlobal(email.getText(), password.getText());
-			System.out.println(u.getCognomeUtente());
+		if (loginManager.login(email.getText(), password.getText())) {	
+			
+		
+			utente= loginManager.setUserGlobal(email.getText(), password.getText());
+			
+			
+			
+			System.out.println(utente.getNomeUtente());
 			/*if (u.getIdRuolo()==2) {
 				((Node)evt.getSource()).getScene().getWindow().hide(); 
 				Stage primaryStage = new Stage();
