@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 
 
-public class Utente {
+public final class Utente {
 	
 	private int id, id_ruolo;
 	private String nome_utente, cognome_utente,email,pwd;
@@ -39,6 +39,7 @@ public class Utente {
 		this.setEmail(resultSet.getString("email"));
 		this.setPwd(resultSet.getString("pwd"));
 	}
+
 	
 	//metodi di get e set
 	public int getId() {return id;}
