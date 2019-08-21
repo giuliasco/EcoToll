@@ -45,7 +45,7 @@
       </ImageView>
       <ImageView fitHeight="101.0" fitWidth="130.0" layoutX="450.0" layoutY="136.0" opacity="0.13" pickOnBounds="true">
          <image>
-            <Image url="@../../../../../../64360.png" />
+            <Image url="@../../../../64360.png" />
          </image>
       </ImageView>
       <PasswordField fx:id="password" layoutX="185.0" layoutY="200.0" prefHeight="41.0" prefWidth="227.0" promptText="Password" />
@@ -54,5 +54,10 @@
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
+      <ImageView fitHeight="101.0" fitWidth="130.0" layoutX="24.0" layoutY="136.0" opacity="0.13" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../64360.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
