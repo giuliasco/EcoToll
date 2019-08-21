@@ -21,7 +21,7 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 	private static final String SHOW_USER="SELECT * FROM utente";
 	private static final String REGISTER_UTENTE="INSERT INTO utente(nome_utente,cognome_utente,email,pwd,id_ruolo) VALUES (?,?,?,?,?)";
 	private static final String DELETE_UTENTE="DELETE FROM utente WHERE email=?";
-	private static final String SHOW_ANAG="SELECT nome_utente,cognome_utente,email,pwd,targa FROM utente, veicolo WHERE utente.id=veicolo.id_utente AND email=? AND pwd=?;";
+	private static final String SHOW_ANAG="SELECT * FROM utente, WHERE email=? AND pwd=?;";
 	private static final String LOG_IN="SELECT * FROM utente WHERE email=? AND pwd=?";
 	private static final String UPDATE_ROLE_TO_ADMIN="UPDATE utente SET id_ruolo=? OR email=? OR pwd=? WHERE email=?";
 	
