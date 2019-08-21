@@ -4,13 +4,13 @@ import application.dao.DAOFactory;
 import application.dao.DAOUtente;
 import application.model.Utente;
 
-public class LoginManager {
+public class UtenteController {
 	
 	private DAOFactory mysqlfactory;
 	private DAOUtente userdao;
  
 	
-	public LoginManager() {
+	public UtenteController() {
 		mysqlfactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 		userdao = mysqlfactory.getDAOUtente();
 				

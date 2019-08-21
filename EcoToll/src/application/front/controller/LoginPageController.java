@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.controller.LoginManager;
+import application.controller.UtenteController;
 import application.dao.DAOUtente;
 import application.model.Utente;
 import javafx.event.ActionEvent;
@@ -15,18 +15,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class LoginController{
+public class LoginPageController{
   
   @FXML private Button accedi;
   @FXML private Button registrati;
   @FXML private TextField email;  
-  @FXML private TextField password;
+  @FXML private PasswordField password;
+  @FXML private Label labelErrore;
   
-  private LoginManager loginManager = new LoginManager();
+  private UtenteController loginManager = new UtenteController();
   private Utente utente;
 
   
@@ -54,6 +56,7 @@ public class LoginController{
   
   @FXML
   public void login (ActionEvent evt) throws IOException {
+	  
       
     if (loginManager.login(email.getText(), password.getText())) {  
       
@@ -94,7 +97,7 @@ public class LoginController{
       
     } 
   
-    
+    else { labelErrore.setText("Email o password errate");}
    
      
 }
