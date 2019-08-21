@@ -32,15 +32,14 @@ public class MySqlDAOUtenteDAOimpl implements DAOUtente{
 
 	
 	@Override
-	public boolean registraUtente(Utente u) {
+	public boolean registraUtente(String nome, String cognome,String email,String pwd) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(REGISTER_UTENTE);
-			prep.setString(1, u.getNomeUtente());
-			prep.setString(2, u.getCognomeUtente());
-			prep.setString(3, u.getEmail());
-			prep.setString(4, u.getPwd());
-			prep.setInt(5, u.getIdRuolo());
+			prep.setString(1, nome);
+			prep.setString(2, cognome);
+			prep.setString(3, email);
+			prep.setString(4, pwd);
 			return prep.execute();
 		}
 		catch (Exception e) {

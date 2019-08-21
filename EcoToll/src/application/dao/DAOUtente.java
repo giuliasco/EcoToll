@@ -7,7 +7,7 @@ public interface DAOUtente {
 	
 	public List<Utente> getAllUtenti();
 	
-	public boolean registraUtente(Utente u);
+	public boolean registraUtente(String nome,String cognome,String email,String pwd);
 	
 	public boolean deleteUtente(Utente u);
 	

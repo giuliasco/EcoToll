@@ -46,7 +46,10 @@ public class UtenteController {
 		if (DaoFactory.getDAOLogin().addUser(login)) return true;
 		else return false;
 	}*/
-	
+	public boolean addUtente(String nome, String cognome, String email, String pwd) {
+		if(userdao.registraUtente(nome,cognome,email,pwd)) return true;
+		else return false;
+	}
 
 	
 }
