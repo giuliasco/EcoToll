@@ -19,11 +19,11 @@ public class AddCaselloPageController implements Initializable {
 	
 	@FXML private TextField nomeCasello;
 	@FXML private TextField altezzaCasello;
-	@FXML private ComboBox<String> autostrada;
+	@FXML private ComboBox<Autostrada> autostrada;
 	
 	public CaselloController caselloController = new CaselloController();
 	
-	private ObservableList<String> elencoAutostrade = FXCollections.observableArrayList();
+	private ObservableList<Autostrada> elencoAutostrade = FXCollections.observableArrayList();
 	private Casello casello = new Casello();
 	private Autostrada autostradaselezionata = null;
 	
@@ -34,7 +34,7 @@ public class AddCaselloPageController implements Initializable {
 		
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
-			autostrada.setItems(elencoAutostrade);
+			autostrada.setItems(this.elencoAutostrade);
 		}
 		
 		public void getComboAutostrada(ActionEvent evt) {

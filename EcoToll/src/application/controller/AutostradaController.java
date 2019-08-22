@@ -26,7 +26,7 @@ public class AutostradaController {
 	}
 	
 	//Lista di autostrade
-	public List<String> getAllAut() {
+	public List<Autostrada> getAllAut() {
 		return mysqlfactory.getDAOAutostrada().getAllAutostrade();
 	}
 
