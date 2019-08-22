@@ -39,6 +39,7 @@ public class RegistrationPageControll {
 		if(!uc.login(email.getText(),password.getText())) {
 		
 			uc.addUtente(nome.getText(),cognome.getText(),email.getText(),password.getText());
+			uc.setUserGlobal(email.getText(), password.getText());
 			 ((Node)evt.getSource()).getScene().getWindow().hide(); 
 		        Stage primaryStage = new Stage();
 		        FXMLLoader loader = new FXMLLoader();

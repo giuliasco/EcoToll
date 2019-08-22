@@ -1,10 +1,14 @@
 package application.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import application.dao.DAOFactory;
 import application.dao.DAOUtente;
 import application.model.Utente;
+import javafx.fxml.Initializable;
 
-public class UtenteController {
+public class UtenteController{
 	
 	private DAOFactory mysqlfactory;
 	private DAOUtente userdao;
@@ -51,6 +55,8 @@ public class UtenteController {
 		else return false;
 	}
 
+
+	
 	
 }
 
