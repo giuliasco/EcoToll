@@ -3,7 +3,7 @@ package application.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Casello {
+public final class Casello {
 	
 		
 		private int id,id_autostrada;
@@ -13,6 +13,13 @@ public class Casello {
 		//costruttore vuoto
 		
 		public Casello() {}
+		
+		 private static Casello instance = null;
+			
+		    public static Casello getIstance() {
+		        if(instance==null)
+		                instance = new Casello();
+		        return instance;}
 		
 		//costruttore che contiene tutti i campi
 		public Casello(int id,int id_autostrada, double altezza_km,String nome_casello) {

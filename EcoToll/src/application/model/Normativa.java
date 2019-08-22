@@ -3,13 +3,20 @@ package application.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Normativa {
+public final class Normativa {
 	
 	private int id,anno_normativa;
 	private String nome_normativa;
+	private static Normativa instance = null;
 	
 	//costruttore vuoto
 	public Normativa() {}
+	
+	public static Normativa getIstance() {
+        if(instance==null)
+                instance = new Normativa();
+        return instance;
+}
 	
 	//costruttore che prevede tutti i campi
 	public Normativa(int id,int anno_normativa,String nome_normativa) {

@@ -19,6 +19,7 @@ public class MySqlDAONormativaDAOimpl implements DAONormativa {
 	
 	private final String NORMATIVA = "SELECT * FROM normativa";
 	private final String ADD_NORMATIVA = "INSERT INTO normativa(nome_normativa, anno_normativa) VALUES (?,?)";
+	private static final String SELECT_NORMATIVA = "select * from normativa where id=1";
 
 	@Override
 	public List<Normativa> getAllNormative() {
@@ -58,5 +59,22 @@ public class MySqlDAONormativaDAOimpl implements DAONormativa {
 		}
 		return false;
 	}
+	
+	public String getNormativa() {
+		Connection conn=null;
+		PreparedStatement pst=null;
+		ResultSet rst=null;		
+		conn = MySQLDAOFactory.createConnection();
+		try {
+			pst=conn.prepareStatement(SELECT_NORMATIVA);
+			rst=pst.executeQuery();
+			
+			if (rst.next()) {
+			return rst.getString("normativa");}
+			else return "Nessuna Normativa presente";
+		}catch (SQLException e)	{
+			e.printStackTrace();
+			return "Errore in SQL";
+	}
 
-}
+	}}

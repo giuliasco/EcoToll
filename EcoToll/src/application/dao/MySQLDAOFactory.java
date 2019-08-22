@@ -13,9 +13,9 @@ public class MySQLDAOFactory extends DAOFactory {
 	
 	//public static final String DRIVER = "com.mysql.jdbc.Driver";
 	//public static final String DBURL = "jdbc:mysql://localhost:3306/ecotoll";
-	public static final String dbName = "EcoToll";
+	public static final String dbName = "ecotoll";
 	public static final String userName = "root";
-	public static final String password="C4neT0by$";
+	public static final String password="PasswordErrata2019";
 	 public static Connection createConnection() {
 	        Connection conn = null;
 	        try {

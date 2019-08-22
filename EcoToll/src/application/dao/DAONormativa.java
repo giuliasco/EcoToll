@@ -11,6 +11,8 @@ public interface DAONormativa {
 	public List<Normativa> getAllNormative();
 	
 	public boolean addNormativa(Normativa n);
+	
+	public String getNormativa();
 
 	
 

@@ -48,7 +48,12 @@ public class RegistrationPageControll {
 		        primaryStage.show();
 		        System.out.println("Utente registrato");
 			
-		}else {giaPresente.setText("Utente già presente");}
+		}else {giaPresente.setText("Utente già presente");
+		nome.setText("");
+		cognome.setText("");
+		email.setText("");
+		password.setText("");
+		}
 		
 	}
 	

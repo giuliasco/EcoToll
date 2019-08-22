@@ -3,7 +3,7 @@ package application.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Autostrada {
+public final class Autostrada {
 	
 	private int id;
 	private double km,tariffa_km;
@@ -12,6 +12,14 @@ public class Autostrada {
 	//costruttore vuoto
 	
 	public Autostrada() {}
+	
+	 private static Autostrada instance = null;
+		
+	    public static Autostrada getIstance() {
+	        if(instance==null)
+	                instance = new Autostrada();
+	        return instance;
+	}
 	
 	//costruttore che contiene tutti i campi
 	public Autostrada(int id, double km,double tariffa_km,String nome_autostrada, String inizio,String fine) {
