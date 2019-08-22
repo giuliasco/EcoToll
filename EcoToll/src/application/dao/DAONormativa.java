@@ -13,6 +13,8 @@ public interface DAONormativa {
 	public boolean addNormativa(Normativa n);
 	
 	public String getNormativa();
+	
+	public Normativa getNomeNormativa(String nomex);
 
 	
 

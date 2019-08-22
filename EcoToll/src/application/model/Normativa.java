@@ -9,14 +9,15 @@ public final class Normativa {
 	private String nome_normativa;
 	private static Normativa instance = null;
 	
+	public static Normativa getInstance() {
+		if(instance==null) instance = new Normativa();
+		return instance;
+	}
+	
 	//costruttore vuoto
 	public Normativa() {}
 	
-	public static Normativa getIstance() {
-        if(instance==null)
-                instance = new Normativa();
-        return instance;
-}
+
 	
 	//costruttore che prevede tutti i campi
 	public Normativa(int id,int anno_normativa,String nome_normativa) {
@@ -41,6 +42,14 @@ public final class Normativa {
 	
 	public String getNomeNormativa() {return nome_normativa;}
 	public void setNomeNormativa(String nome_normativa) {this.nome_normativa=nome_normativa;}
+	
+	public String toString() {
+		return this.nome_normativa;
+	}
+	
+	public void setGlobal(Normativa n) {
+		instance = n;
+	}
 	
 }
 

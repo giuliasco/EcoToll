@@ -11,17 +11,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class AddCaselloPageController implements Initializable {
 	
 	@FXML private TextField nomeCasello;
 	@FXML private TextField altezzaCasello;
 	@FXML private ComboBox<Autostrada> autostrada;
+	@FXML private Button bottoneAnnulla;
 	
-	public CaselloController caselloController = new CaselloController();
+	
 	
 	private ObservableList<Autostrada> elencoAutostrade = FXCollections.observableArrayList();
 	private Casello casello = new Casello();
@@ -40,5 +47,18 @@ public class AddCaselloPageController implements Initializable {
 		public void getComboAutostrada(ActionEvent evt) {
 			autostradaselezionata=autostrada.getValue();
 		}
+		
+		public void annulla (ActionEvent evt){
+			try {
+				((Node)evt.getSource()).getScene().getWindow().hide(); 
+				Stage primaryStage = new Stage();
+				FXMLLoader loader = new FXMLLoader();
+				Pane root=loader.load(getClass().getResource("/application/front/fxml/AdminPage.fxml").openStream());
+				Scene scene = new Scene(root);
+				primaryStage.setScene(scene);
+				primaryStage.show();		
+			}catch(Exception e){
+				}
+			}
 
 }
