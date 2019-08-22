@@ -1,14 +1,12 @@
 package application.front.controller;
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.controller.AutostradaController;
+
 import application.controller.CaselloController;
 import application.controller.NormativaController;
-import application.controller.UtenteController;
-import application.model.Autostrada;
 import application.model.Casello;
 import application.model.Normativa;
 import application.model.Utente;
