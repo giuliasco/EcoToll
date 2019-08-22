@@ -18,38 +18,42 @@ import javafx.stage.Stage;
 
 public class RegistrationPageControll {
 	
-	@FXML private TextField nome;
+	@FXML private TextField nome ;
 	@FXML private TextField cognome;
 	@FXML private TextField email;
 	@FXML private PasswordField password;
-	@FXML private PasswordField password1;
 	@FXML private Button bottoneRegistrati;
 	@FXML private Button bottoneAnnulla;
+	@FXML private Button indietro;
 	@FXML private Label giaPresente;
 	
 	
 	 private UtenteController uc = new UtenteController();
-	  
-	
+	 Utente u = Utente.getIstance();
+	 
 	  
 	  @FXML 
 	
 	public void Registra(ActionEvent evt) throws IOException {
 	
-		if(!uc.login(email.getText(),password.getText())) {
-		
-			uc.addUtente(nome.getText(),cognome.getText(),email.getText(),password.getText());
-			uc.setUserGlobal(email.getText(), password.getText());
-			 ((Node)evt.getSource()).getScene().getWindow().hide(); 
-		        Stage primaryStage = new Stage();
-		        FXMLLoader loader = new FXMLLoader();
-		        Pane root=loader.load(getClass().getResource("/application/front/fxml/UserPage.fxml").openStream());
-		        Scene scene = new Scene(root);          
-		        primaryStage.setScene(scene);
-		        primaryStage.show();
-		        System.out.println("Utente registrato");
+		if(!uc.login(email.getText(), password.getText())) {
 			
-		}else {giaPresente.setText("Utente già presente");
+			if (nome.getText().isEmpty() || cognome.getText().isEmpty() || email.getText().isEmpty() ||  password.getText().isEmpty()) {
+				giaPresente.setText("Campi mancanti");
+			}else {
+				uc.addUtente(nome.getText(),cognome.getText(),email.getText(),password.getText());
+				uc.setUserGlobal(email.getText(), password.getText());
+				((Node)evt.getSource()).getScene().getWindow().hide(); 
+		        	Stage primaryStage = new Stage();
+		        	FXMLLoader loader = new FXMLLoader();
+		        	Pane root=loader.load(getClass().getResource("/application/front/fxml/UserPage.fxml").openStream());
+		        	Scene scene = new Scene(root);          
+		        	primaryStage.setScene(scene);
+		        	primaryStage.show();
+		        	System.out.println("Utente registrato");
+				
+			}
+			}else {giaPresente.setText("Utente già presente");
 		nome.setText("");
 		cognome.setText("");
 		email.setText("");
@@ -69,6 +73,19 @@ public class RegistrationPageControll {
 	        	  
 		  
 	  }
-	
+	  @FXML
+	  public void indietro(ActionEvent evt) throws IOException {
+			try{((Node)evt.getSource()).getScene().getWindow().hide(); 
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root=loader.load(getClass().getResource("/application/front/fxml/Login.fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		}catch(Exception e){
+			}
+	        	  
+		  
+	  }
 
 }
