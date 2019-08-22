@@ -32,5 +32,13 @@ public class CaselloController {
 	public boolean aggiungi(Casello c) {
 		return mysqlfactory.getDAOCasello().addCasello(c);
 	}
+	
+	public static CaselloController getIstance() {
+		return new CaselloController();
+	}
+	
+	public void setCaselloGlobal(Casello c) {
+		userdao.deleteCasello(c);	
+	}
 
 }

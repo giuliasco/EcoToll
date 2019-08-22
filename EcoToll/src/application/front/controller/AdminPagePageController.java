@@ -1,5 +1,6 @@
 package application.front.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -37,18 +38,23 @@ public class AdminPagePageController implements Initializable {
 	@FXML private Label normativaCorrente;
 	@FXML private Label labelBenvenuto;
 	
+	private CaselloController cc = new CaselloController();
+	
 	
 	
 	private ObservableList<Normativa> elencoNormative = FXCollections.observableArrayList();
+	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
 	private Normativa normativaselezionata = null;
 	private NormativaController normativaController = new NormativaController();
 	Normativa n = Normativa.getInstance();
 	Utente u=Utente.getIstance();
+	private Casello caselloselezionato = null;
 	
 	
 	//costruttore
 			public AdminPagePageController() {
 				elencoNormative.setAll(NormativaController.getIstance().getAllNorm());
+				elencoCaselli.setAll(CaselloController.getIstance().getAllCas());
 			}
 			
 			@Override
@@ -56,15 +62,16 @@ public class AdminPagePageController implements Initializable {
 				normativeDisponibili.setItems(this.elencoNormative);
 				normativaCorrente.setText(n.getNomeNormativa());
 				labelBenvenuto.setText("Benvenuto " + u.getNomeUtente());
-				
+				caselli.setItems(this.elencoCaselli);
+			}
+			
+			public void getComboCaselli(ActionEvent evt) {
+				caselloselezionato=caselli.getValue();
 			}
 			
 			public void getComboNormative(ActionEvent evt) {
 				normativaselezionata=normativeDisponibili.getValue();
-				
-			
-			}
-	
+				}
 	
 	
 	public void logout (ActionEvent evt){
@@ -80,6 +87,11 @@ public class AdminPagePageController implements Initializable {
 			}
 		}
 	
+	public void eliminaCasello(ActionEvent evt) {
+		caselloselezionato = caselli.getValue();
+		cc.delete(caselloselezionato);
+		caselli.getItems().remove(caselloselezionato);
+	}
 		
 		public void aggiornaNormativa (ActionEvent evt) {
 		normativaselezionata=normativeDisponibili.getValue();
@@ -103,12 +115,9 @@ public class AdminPagePageController implements Initializable {
 			}catch(Exception e){
 				}
 			}
-		
-		
-	
-		
+}
 	
 	
 	
 
-}
+

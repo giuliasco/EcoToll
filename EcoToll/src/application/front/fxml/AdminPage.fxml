@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="665.0" style="-fx-background-color: #2376AD;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.AdminPagePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="665.0" style="-fx-background-color: #2376AD;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.AdminPagePageController">
    <children>
       <Label layoutX="27.0" layoutY="28.0" prefHeight="27.0" prefWidth="331.0" text="PANNELLO AMMINISTRATORE">
          <font>
@@ -38,7 +38,7 @@
       <Button fx:id="bottoneAggiornaNormativa" layoutX="202.0" layoutY="193.0" mnemonicParsing="false" onAction="#aggiornaNormativa" text="Aggiorna" />
       <ComboBox fx:id="normativeDisponibili" layoutX="22.0" layoutY="193.0" prefWidth="150.0" promptText="Normative Disponibili" />
       <ComboBox fx:id="caselli" layoutX="368.0" layoutY="149.0" prefWidth="150.0" promptText="Scegli casello" />
-      <Button fx:id="bottoneEliminaCasello" layoutX="548.0" layoutY="149.0" mnemonicParsing="false" text="Elimina Casello" />
+      <Button fx:id="bottoneEliminaCasello" layoutX="548.0" layoutY="149.0" mnemonicParsing="false" onAction="#eliminaCasello" text="Elimina Casello" />
       <Label layoutX="449.0" layoutY="93.0" text="ELIMINA CASELLO">
          <font>
             <Font size="17.0" />

@@ -52,6 +52,9 @@ public final class Casello {
 		public String getNomeCasello() {return nome_casello;}
 		public void setNomeCasello(String nome_casello) {this.nome_casello=nome_casello;}
 		
+		public String toString() {
+			return this.nome_casello;
+		}
 	
 	}
 

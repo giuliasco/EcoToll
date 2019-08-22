@@ -17,7 +17,7 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 	private PreparedStatement prep=null;
 	private ResultSet res = null;
 	
-	private final String EXIT = "SELECT * FROM casello";
+	private final String EXIT = "SELECT * FROM casello ORDER BY nome_casello asc";
 	private final String ADD_CASELLO = "INSERT INTO casello (nome_casello, altezza_km,id_autostrada) VALUES (?,?,?)";
 	private final String SELECT_INFOCASELLO = "SELECT * FROM casello WHERE id=?";
 	private final String DELETE_CASELLO= "DELETE FROM casello WHERE nome_casello=?";
