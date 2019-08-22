@@ -6,9 +6,11 @@ import java.util.ResourceBundle;
 import application.controller.AutostradaController;
 import application.controller.CaselloController;
 import application.controller.NormativaController;
+import application.controller.UtenteController;
 import application.model.Autostrada;
 import application.model.Casello;
 import application.model.Normativa;
+import application.model.Utente;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,6 +35,7 @@ public class AdminPagePageController implements Initializable {
 	@FXML private Button bottoneCalcolaPedaggio;
 	@FXML private Button bottoneLogout;
 	@FXML private Label normativaCorrente;
+	@FXML private Label labelBenvenuto;
 	
 	
 	
@@ -40,8 +43,7 @@ public class AdminPagePageController implements Initializable {
 	private Normativa normativaselezionata = null;
 	private NormativaController normativaController = new NormativaController();
 	Normativa n = Normativa.getInstance();
-	
-	
+	Utente u=Utente.getIstance();
 	
 	
 	//costruttore
@@ -53,6 +55,7 @@ public class AdminPagePageController implements Initializable {
 			public void initialize(URL location, ResourceBundle resources) {
 				normativeDisponibili.setItems(this.elencoNormative);
 				normativaCorrente.setText(n.getNomeNormativa());
+				labelBenvenuto.setText("Benvenuto " + u.getNomeUtente());
 				
 			}
 			
