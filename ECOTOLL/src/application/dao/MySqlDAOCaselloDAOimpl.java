@@ -52,7 +52,7 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 
 
 	@Override
-	public boolean addCasello(Casello c) {
+	/*public boolean addCasello(Casello c) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(ADD_CASELLO);
@@ -68,7 +68,7 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 		}
 		return false;
 		
-	}
+	}*/
 	
 
 	public boolean deleteCasello(Casello c) {

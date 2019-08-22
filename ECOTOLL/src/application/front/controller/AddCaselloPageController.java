@@ -2,6 +2,7 @@ package application.front.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.controller.AutostradaController;
@@ -33,8 +34,17 @@ public class AddCaselloPageController implements Initializable {
 	
 	private ObservableList<Autostrada> elencoAutostrade = FXCollections.observableArrayList();
 	private Casello casello = new Casello();
-	private Autostrada autostradaselezionata = null;
-	CaselloController casc = null;
+	private Autostrada autostradaselezionata  ;
+	private CaselloController casc = new CaselloController(); 
+	
+	
+	//PROVA NUOVO
+	private  AutostradaController ac = new AutostradaController();
+	
+	
+	
+	
+	
 	
 	//costruttore
 		public AddCaselloPageController() {
@@ -46,12 +56,15 @@ public class AddCaselloPageController implements Initializable {
 			autostrada.setItems(this.elencoAutostrade);
 		}
 		
-		public void getComboAutostrada(ActionEvent evt) {
-			autostradaselezionata=autostrada.getValue();
-			System.out.println(autostrada.getValue());
-
+		@FXML
+		public void getComboAutostrada(ActionEvent evt)  {
+			try{
+				autostradaselezionata=autostrada.getValue();
+			}catch(Exception e){System.out.println("CAZZOOOOOOO");}
+ 
 		}
 		
+		@FXML
 		public void annulla (ActionEvent evt){
 			try {
 				((Node)evt.getSource()).getScene().getWindow().hide(); 
@@ -71,16 +84,27 @@ public class AddCaselloPageController implements Initializable {
 		
 	public void Aggiungi(ActionEvent evt) throws IOException {
 			
-			System.out.println("Campi mancantieeeeeeeeeeeee");
+			String x = autostrada.getValue().toString();
+			ac.setAutostradaGlobal(x);
+			Autostrada a = Autostrada.getInstance();
+			
+			System.out.println(a.getNomeAutostrada() +"    " +a.getId() +"CAZZOOOOO");
+			try {
 			if (nomeCasello.getText().isEmpty() || altezzaCasello.getText().isEmpty()) {
 					System.out.println("Campi mancanti");
 			}else {
-				System.out.println(autostradaselezionata.getNomeAutostrada());
-				casc.addCasello(nomeCasello.getText(), altezzaCasello.getText(), autostradaselezionata.hashCode());
-				casc.setCaselloGlobal(nomeCasello.getText(), altezzaCasello.getText(), autostradaselezionata.getId());
-			        System.out.println("casello aggiunto");
+				
+				casc.addCasello(nomeCasello.getText(), altezzaCasello.getText(), a.getId());
+				//casc.setCaselloGlobal(nomeCasello.getText(), altezzaCasello.getText(), a.getId()); DA RIVIDERE PERCHÈ È SBAGLIATO QUESTO COMPLETAMENTE!
+				Casello c = Casello.getIstance();
+			        System.out.println("casello aggiunto" + c.getNomeCasello() );
 					
 			}
+			}catch(Exception e) {
+				e.printStackTrace();
+				System.out.println("Errore nel caricamento sul DB");
+			}
+				
 			}
 			
 		}	

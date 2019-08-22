@@ -34,7 +34,9 @@ public class NormativaController {
 		}
 		
 		public void setNormativaGlobal(String nomex) {
-			mysqlfactory.getDAONormativa().getNomeNormativa(nomex);
+			userdao.getNomeNormativa(nomex);
 		}
+		
+		
 
 }

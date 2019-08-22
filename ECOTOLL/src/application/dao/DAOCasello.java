@@ -11,7 +11,7 @@ public interface DAOCasello {
 	
 		public Casello getCasello(Casello c);
 				
-		public boolean addCasello(Casello c);
+		//public boolean addCasello(Casello c);
 		
 		public boolean deleteCasello(Casello c);
 		

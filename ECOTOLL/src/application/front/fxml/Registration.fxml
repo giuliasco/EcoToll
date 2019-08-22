@@ -32,7 +32,7 @@
       <TextField fx:id="nome" layoutX="163.0" layoutY="98.0" prefHeight="34.0" prefWidth="228.0" promptText="Nome" />
       <TextField fx:id="cognome" layoutX="164.0" layoutY="154.0" prefHeight="34.0" prefWidth="228.0" promptText="Cognome" />
       <TextField fx:id="email" layoutX="164.0" layoutY="210.0" prefHeight="34.0" prefWidth="228.0" promptText="Email" />
-      <Button fx:id="bottoneRegistrati" layoutX="109.0" layoutY="388.0" mnemonicParsing="false" onAction="#Registra" prefHeight="47.0" prefWidth="115.0" style="-fx-background-color: #EF7100;" text="Registrati" textFill="#fbfffd">
+      <Button fx:id="bottoneRegistrati" layoutX="334.0" layoutY="386.0" mnemonicParsing="false" onAction="#Registra" prefHeight="47.0" prefWidth="115.0" style="-fx-background-color: #EF7100;" text="Registrati" textFill="#fbfffd">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -40,7 +40,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="bottoneAnnulla" layoutX="201.0" layoutY="341.0" mnemonicParsing="false" onAction="#Annulla" prefHeight="26.0" prefWidth="138.0" style="-fx-background-color: #EF7100;" text="Annulla" textFill="WHITE">
+      <Button fx:id="bottoneAnnulla" layoutX="209.0" layoutY="349.0" mnemonicParsing="false" onAction="#Annulla" prefHeight="26.0" prefWidth="138.0" style="-fx-background-color: #EF7100;" text="Annulla" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -65,7 +65,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="indietro" layoutX="330.0" layoutY="387.0" mnemonicParsing="false" onAction="#indietro" prefHeight="47.0" prefWidth="115.0" style="-fx-background-color: #EF7100;" text="Indietro" textFill="WHITE">
+      <Button fx:id="indietro" layoutX="107.0" layoutY="386.0" mnemonicParsing="false" onAction="#indietro" prefHeight="47.0" prefWidth="115.0" style="-fx-background-color: #EF7100;" text="Indietro" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

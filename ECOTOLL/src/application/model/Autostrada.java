@@ -3,11 +3,18 @@ package application.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Autostrada {
+public final class Autostrada {
 	
 	private int id;
 	private double km,tariffa_km;
 	private String nome_autostrada,inizio,fine;
+	
+	public static Autostrada instance = null;
+	
+	public static Autostrada getInstance() {
+		if(instance==null) instance = new Autostrada();
+		return instance;
+	}
 	
 	//costruttore vuoto
 	
@@ -58,6 +65,9 @@ public class Autostrada {
 	
 	public String toString() {
 		return this.nome_autostrada;
+	}
+	public void setGlobal(Autostrada a) {
+		instance = a;
 	}
 	
 

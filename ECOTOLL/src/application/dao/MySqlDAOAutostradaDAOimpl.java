@@ -93,22 +93,28 @@ public class MySqlDAOAutostradaDAOimpl implements DAOAutostrada {
 	
 	
 	@Override
-	public Autostrada getAutostrada(Autostrada a) {
+	public Autostrada getAutostrada(String nomea) {
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(SELECT_INFO_AUTOSTRADA);
-			  prep.setString(1, a.getNomeAutostrada());
+			  prep.setString(1, nomea);
 			  res = prep.executeQuery();
-			  if(res.next()) {
+			  res.next();
+			  Autostrada a = new Autostrada(res);
+			  Autostrada a1= Autostrada.getInstance();
+			  a1.setGlobal(a);
+			  return a1;
+			  /*if(res.next()) {
 				  return new Autostrada(res);
-			  }
+			  }*/
 	}
 		catch (SQLException e) {
 		e.printStackTrace(); 
 		System.out.println("Problema nel DB");
+		return null;
 		}
 	
-		return null;
+		
 		}
 }
 		

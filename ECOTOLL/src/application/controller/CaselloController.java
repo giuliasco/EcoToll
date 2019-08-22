@@ -9,11 +9,11 @@ import application.model.Casello;
 public class CaselloController {
 	
 	private DAOFactory mysqlfactory;
-	private DAOCasello userdao;
+	private DAOCasello casellodao;
 	
 	public CaselloController() {
 		mysqlfactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-		userdao = mysqlfactory.getDAOCasello();
+		casellodao = mysqlfactory.getDAOCasello();
 	}
 	
 	public Casello get(Casello c) {
@@ -29,20 +29,20 @@ public class CaselloController {
 		return mysqlfactory.getDAOCasello().deleteCasello(casello);
 	}
 	
-	public boolean aggiungi(Casello c) {
+	/*public boolean aggiungi(Casello c) {
 		return mysqlfactory.getDAOCasello().addCasello(c);
-	}
+	}*/
 	
 	public static CaselloController getIstance() {
 		return new CaselloController();
 	}
 	
-	public void setCaselloGlobal(String nome_casello, String altezza_casello, int id_autostrada) {
-		userdao.aggCasello(nome_casello, altezza_casello, id_autostrada);	
-	}
+	/*public void setCaselloGlobal(String nome_casello, String altezza_casello, int id_autostrada) {
+		casellodao.aggCasello(nome_casello, altezza_casello, id_autostrada);	
+	}*/
 	
 	public boolean addCasello(String nome_casello, String altezza_casello, int id_autostrada ) {
-		if(userdao.aggCasello(nome_casello, altezza_casello, id_autostrada)) return true;
+		if(casellodao.aggCasello(nome_casello, altezza_casello, id_autostrada)) return true;
 		else return false;
 	}
 
