@@ -16,5 +16,7 @@ public interface DAOCasello {
 		public boolean deleteCasello(Casello c);
 		
 		public void updateCasello(Casello c);
+		
+		public boolean aggCasello (String nome_casello, String altezza_casello, int id_autostrada);
 
 }

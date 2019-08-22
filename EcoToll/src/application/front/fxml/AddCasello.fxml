@@ -50,7 +50,7 @@
          </font>
       </Label>
       <ComboBox fx:id="autostrada" layoutX="441.0" layoutY="156.0" prefWidth="150.0" />
-      <Button fx:id="bottoneAddCasello" layoutX="69.0" layoutY="288.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="192.0" style="-fx-background-color: #EF7100;" text="AGGIUNGI CASELLO" textFill="WHITE">
+      <Button fx:id="bottoneAddCasello" layoutX="69.0" layoutY="288.0" mnemonicParsing="false" onAction="#Aggiungi" prefHeight="51.0" prefWidth="192.0" style="-fx-background-color: #EF7100;" text="AGGIUNGI CASELLO" textFill="WHITE">
          <font>
             <Font name="Courier New Bold Italic" size="15.0" />
          </font>

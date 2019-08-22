@@ -37,8 +37,13 @@ public class CaselloController {
 		return new CaselloController();
 	}
 	
-	public void setCaselloGlobal(Casello c) {
-		userdao.deleteCasello(c);	
+	public void setCaselloGlobal(String nome_casello, String altezza_casello, int id_autostrada) {
+		userdao.aggCasello(nome_casello, altezza_casello, id_autostrada);	
+	}
+	
+	public boolean addCasello(String nome_casello, String altezza_casello, int id_autostrada ) {
+		if(userdao.aggCasello(nome_casello, altezza_casello, id_autostrada)) return true;
+		else return false;
 	}
 
 }

@@ -1,5 +1,6 @@
 package application.front.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,6 +34,7 @@ public class AddCaselloPageController implements Initializable {
 	private ObservableList<Autostrada> elencoAutostrade = FXCollections.observableArrayList();
 	private Casello casello = new Casello();
 	private Autostrada autostradaselezionata = null;
+	CaselloController casc = null;
 	
 	//costruttore
 		public AddCaselloPageController() {
@@ -46,6 +48,8 @@ public class AddCaselloPageController implements Initializable {
 		
 		public void getComboAutostrada(ActionEvent evt) {
 			autostradaselezionata=autostrada.getValue();
+			System.out.println(autostrada.getValue());
+
 		}
 		
 		public void annulla (ActionEvent evt){
@@ -60,5 +64,28 @@ public class AddCaselloPageController implements Initializable {
 			}catch(Exception e){
 				}
 			}
+		
+		
+		
+		@FXML 
+		
+	public void Aggiungi(ActionEvent evt) throws IOException {
+			
+			System.out.println("Campi mancantieeeeeeeeeeeee");
+			if (nomeCasello.getText().isEmpty() || altezzaCasello.getText().isEmpty()) {
+					System.out.println("Campi mancanti");
+			}else {
+				System.out.println(autostradaselezionata.getNomeAutostrada());
+				casc.addCasello(nomeCasello.getText(), altezzaCasello.getText(), autostradaselezionata.hashCode());
+				casc.setCaselloGlobal(nomeCasello.getText(), altezzaCasello.getText(), autostradaselezionata.getId());
+			        System.out.println("casello aggiunto");
+					
+			}
+			}
+			
+		}	
+		
+		
+		
 
-}
+

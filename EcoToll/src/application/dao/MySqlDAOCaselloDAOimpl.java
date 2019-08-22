@@ -125,5 +125,22 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 			}
 		
 	}
+	
+	
+	@Override
+	public boolean aggCasello(String nome_casello, String altezza_casello,int id_autostrada) {
+		try {
+			con = MySQLDAOFactory.createConnection();
+			prep = (PreparedStatement) con.prepareStatement(ADD_CASELLO);
+			prep.setString(1, nome_casello);
+			prep.setString(2, altezza_casello);
+			prep.setInt(3, id_autostrada);
+			return prep.execute();
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		return false;
+	}
 
 }
