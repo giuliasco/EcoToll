@@ -18,9 +18,9 @@ public class Main extends Application {
 
     @Override
    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/application/front/fxml/AddCasello.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/application/front/fxml/Login.fxml"));
         primaryStage.setTitle("Benvenuto!");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 700, 500));
         primaryStage.show();
     	
     }
