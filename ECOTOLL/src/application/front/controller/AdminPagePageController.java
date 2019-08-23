@@ -59,7 +59,7 @@ public class AdminPagePageController implements Initializable {
 			public void initialize(URL location, ResourceBundle resources) {
 				normativeDisponibili.setItems(this.elencoNormative);
 				normativaCorrente.setText(n.getNomeNormativa());
-				labelBenvenuto.setText("Benvenuto " + u.getNomeUtente());
+				labelBenvenuto.setText("Benvenuto Admin " + u.getNomeUtente().toUpperCase());
 				caselli.setItems(this.elencoCaselli);
 			}
 			
@@ -84,6 +84,22 @@ public class AdminPagePageController implements Initializable {
 		}catch(Exception e){
 			}
 		}
+	
+	
+	@FXML 
+	  public void openUserPage (ActionEvent evt){
+		try {
+			((Node)evt.getSource()).getScene().getWindow().hide(); 
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root=loader.load(getClass().getResource("/application/front/fxml/UserPage.fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		}catch(Exception e){
+			}
+		}
+	
 	
 	public void eliminaCasello(ActionEvent evt) {
 		caselloselezionato = caselli.getValue();
