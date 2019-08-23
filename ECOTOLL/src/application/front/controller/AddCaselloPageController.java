@@ -88,7 +88,7 @@ public class AddCaselloPageController implements Initializable {
 		@FXML 
 		
 	public void Aggiungi(ActionEvent evt) throws IOException {
-			
+			try {
 			String x = autostrada.getValue().toString();
 			ac.setAutostradaGlobal(x);
 			Autostrada a = Autostrada.getInstance();
@@ -97,7 +97,7 @@ public class AddCaselloPageController implements Initializable {
 		
 		
 			System.out.println(a.getNomeAutostrada() +" "+d+" "+s+"   " +a.getId() +"  CAZZOOOOO");
-			try {
+			
 			if (s==null || d == 0  ) {
 				messaggiVari.setText("Campi mancanti");
 					System.out.println("Campi mancanti");
