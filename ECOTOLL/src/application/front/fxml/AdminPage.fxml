@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -39,18 +40,24 @@
       <ComboBox fx:id="normativeDisponibili" layoutX="22.0" layoutY="193.0" prefWidth="150.0" promptText="Normative Disponibili" />
       <ComboBox fx:id="caselli" layoutX="368.0" layoutY="149.0" prefWidth="150.0" promptText="Scegli casello" />
       <Button fx:id="bottoneEliminaCasello" layoutX="548.0" layoutY="149.0" mnemonicParsing="false" onAction="#eliminaCasello" text="Elimina Casello" />
-      <Label layoutX="449.0" layoutY="93.0" text="ELIMINA CASELLO">
+      <Label layoutX="437.0" layoutY="93.0" text="ELIMINA CASELLO" textFill="WHITE">
          <font>
-            <Font size="17.0" />
+            <Font name="System Bold" size="17.0" />
          </font>
+         <effect>
+            <Glow />
+         </effect>
       </Label>
-      <Label layoutX="56.0" layoutY="93.0" text="AGGIORNA NORMATIVA">
+      <Label layoutX="56.0" layoutY="93.0" text="AGGIORNA NORMATIVA" textFill="#fffdfd">
          <font>
-            <Font size="17.0" />
+            <Font name="System Bold" size="17.0" />
          </font>
+         <effect>
+            <Glow />
+         </effect>
       </Label>
       <Separator layoutX="333.0" layoutY="63.0" orientation="VERTICAL" prefHeight="200.0" />
-      <Button fx:id="bottoneCalcolaPedaggio" layoutX="217.0" layoutY="310.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="236.0" text="Calcola Pedaggio" textFill="#41d664">
+      <Button fx:id="bottoneCalcolaPedaggio" layoutX="217.0" layoutY="310.0" mnemonicParsing="false" onAction="#openUserPage" prefHeight="59.0" prefWidth="236.0" text="Calcola Pedaggio" textFill="#41d664">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -74,10 +81,13 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Label fx:id="labelBenvenuto" layoutX="398.0" layoutY="33.0" prefHeight="21.0" prefWidth="150.0" textFill="#302525">
+      <Label fx:id="labelBenvenuto" layoutX="398.0" layoutY="33.0" prefHeight="21.0" prefWidth="150.0">
          <effect>
-            <InnerShadow blurType="GAUSSIAN" choke="0.38" color="#ff1a1a" />
+            <InnerShadow blurType="GAUSSIAN" choke="0.38" color="#010101" />
          </effect>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
       </Label>
    </children>
    <effect>
