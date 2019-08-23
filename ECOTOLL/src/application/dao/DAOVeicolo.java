@@ -8,7 +8,7 @@ public interface DAOVeicolo {
 	
 	public List<Veicolo> getAllVeicoli();
 
-	public Veicolo getVeicolo(Veicolo v);
+	public Veicolo getVeicolo(String targa);
 			
 	public boolean addVeicolo(Veicolo v);
 		
@@ -19,4 +19,5 @@ public interface DAOVeicolo {
 	
 	public void updateClassEU (Veicolo v);
 	
+	public boolean veicoloPresente(String targa);
 }

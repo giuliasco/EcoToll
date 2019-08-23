@@ -15,12 +15,13 @@ public class MySqlDAOVeicoloDAOimpl implements DAOVeicolo {
 	private PreparedStatement prep=null;
 	private ResultSet res = null;
 	
-	private static final String SHOW_VEICOLI="SELECT * FROM veicolo";
+	private static final String SHOW_ALL_VEICOLI="SELECT * FROM veicolo";
 	private static final String ADD_VEICOLO="INSERT INTO veicolo(targa,id_ci,id_ceu,id_utente) VALUES (?,?,?,?)";
 	private static final String DELETE_VEICOLO="DELETE FROM veicolo WHERE targa=?";
 	private static final String SHOW_INFO="SELECT targa,classe_europea.tipo,classe_italiana.tipo FROM veicolo, classe_europea, classe_italiana WHERE classe_europea.id=veicolo.id_ceu AND classe_italiana.id=veicolo.id_ci AND veicolo.id=?";
 	private static final String UPDATE_CLASSIT="UPDATE veicolo SET id_ci=? WHERE targa=?";
 	private static final String UPDATE_CLASSEU="UPDATE veicolo SET id_ceu=? WHERE targa=?";
+	private static final String SHOW_VEICOLO="SELECT * FROM veicolo WHERE targa=?";
 
 	
 
@@ -29,7 +30,7 @@ public class MySqlDAOVeicoloDAOimpl implements DAOVeicolo {
 		List<Veicolo> list = new ArrayList<>();
 		try {
 			  con = MySQLDAOFactory.createConnection();
-			  prep = (PreparedStatement) con.prepareStatement(SHOW_VEICOLI);
+			  prep = (PreparedStatement) con.prepareStatement(SHOW_ALL_VEICOLI);
 			  res = prep.executeQuery();
 			  while(res.next()) {
 				  Veicolo veicolo= new Veicolo();
@@ -49,14 +50,17 @@ public class MySqlDAOVeicoloDAOimpl implements DAOVeicolo {
 	}
 
 	@Override
-	public Veicolo getVeicolo(Veicolo v) {
+	public Veicolo getVeicolo(String targa) {
 		try {
 			con = MySQLDAOFactory.createConnection();
-			prep = (PreparedStatement) con.prepareStatement(SHOW_INFO);
-			prep.setInt(1, v.getId());
+			prep = (PreparedStatement) con.prepareStatement(SHOW_VEICOLO);
+			prep.setString(1, targa);
 			res = prep.executeQuery();
 			res.next();
-			return new Veicolo(res);
+			Veicolo v= new Veicolo(res);
+			Veicolo v1=Veicolo.getIstance();
+			v1.setglobal(v);
+			return v1;
 		}
 		catch(SQLException e) {
 			e.printStackTrace(); 
@@ -131,6 +135,23 @@ public class MySqlDAOVeicoloDAOimpl implements DAOVeicolo {
 				
 			}
 		
+	}
+
+	@Override
+	public boolean veicoloPresente(String targa) {
+		try {
+			  con = MySQLDAOFactory.createConnection();
+			  prep = (PreparedStatement) con.prepareStatement(SHOW_VEICOLO);
+			  prep.setString(1, targa);
+			
+			  res = prep.executeQuery(); 
+			  
+			  if (res.next()) {
+				  return true;	  
+			  }
+			  
+			  } catch (SQLException e) {e.printStackTrace(); System.out.println("Errore Query");}	
+		return false;
 	}
 
 }

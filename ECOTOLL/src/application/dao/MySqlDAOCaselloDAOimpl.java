@@ -22,6 +22,8 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 	private final String SELECT_INFOCASELLO = "SELECT * FROM casello WHERE nome_casello=? AND altezza_km=?";
 	private final String DELETE_CASELLO= "DELETE FROM casello WHERE nome_casello=?";
 	private final String UPDATE_CASELLO="UPDATE casello SET nome_casello=? OR altezza_km=? WHERE id=?";
+	private final String SELECT_INFOCASELLO_NAME = "SELECT * FROM casello WHERE nome_casello=?";
+
 
 		@Override
 		public List<Casello> getAllCasello(){
@@ -146,6 +148,30 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 			System.out.println(e);
 		}
 		return false;
+	}
+
+
+
+
+	@Override
+	public Casello getCaselloByName(String nome_casello) {
+		try {
+			  con = MySQLDAOFactory.createConnection();
+			  prep = (PreparedStatement) con.prepareStatement(SELECT_INFOCASELLO_NAME);
+			  prep.setString(1, nome_casello);
+			  res = prep.executeQuery();
+			  res.next();
+			  Casello c = new Casello(res);
+			  Casello c1 = Casello.getIstance();
+			  c1.setGlobal(c);
+			  return c1;
+			 
+	}
+		catch (SQLException e) {
+		e.printStackTrace(); 
+		System.out.println("Problema nel DB");
+		return null;
+		}
 	}
 
 }

@@ -45,5 +45,8 @@ public class CaselloController {
 		if(casellodao.aggCasello(nome_casello, altezza_casello, id_autostrada)) return true;
 		else return false;
 	}
-
+   
+	public void setCaselloGlobalByName (String nome_casello) {
+		casellodao.getCaselloByName(nome_casello);
+	}
 }

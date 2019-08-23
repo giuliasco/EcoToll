@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import application.controller.CaselloController;
 import application.controller.NormativaController;
 import application.controller.UtenteController;
+import application.controller.VeicoloController;
 import application.model.Casello;
 import application.model.Utente;
 import javafx.collections.FXCollections;
@@ -40,9 +41,11 @@ public class UserPagePageController implements Initializable{
 	
 	private ObservableList<Casello> caselloIn = FXCollections.observableArrayList();
 	private ObservableList<Casello> caselloOut = FXCollections.observableArrayList();
-	private Casello caselloSelezionatop= null;
-	private Casello caselloSelezionatoa= null;
+	private Casello caselloSelezionatop;
+	private Casello caselloSelezionatoa;
 	private CaselloController caselloController = new CaselloController();
+	private VeicoloController veicoloController = new VeicoloController();
+	
 	
 	//costruttore
 	public UserPagePageController() {
@@ -86,27 +89,48 @@ public class UserPagePageController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if (u.getIdRuolo()==2) {indietro.setVisible(true);
-		labelBenvenuto.setText("Benvenuto Admin " + u.getNomeUtente().toUpperCase());
+		//labelBenvenuto.setText("Benvenuto Admin " + u.getNomeUtente().toUpperCase());
 		partenza.setItems(this.caselloIn);
 		arrivo.setItems(this.caselloOut);
 		}
 		else {
 		indietro.setVisible(false);
-		labelBenvenuto.setText("Benvenuto " + u.getNomeUtente().toUpperCase());
+		//labelBenvenuto.setText("Benvenuto " + u.getNomeUtente().toUpperCase());
 		partenza.setItems(this.caselloIn);
 		arrivo.setItems(this.caselloOut);}
 	}
 	
 	
-	
+	@FXML
 	public void getComboCaselli(ActionEvent evt) {
 		caselloSelezionatop=partenza.getValue();
 		caselloSelezionatoa=arrivo.getValue();
 		
 	}
 	
-	
-	
+	@FXML
+	public void calcolaPedaggio (ActionEvent evt){
+		
+		String p = partenza.getValue().toString();
+		String a = arrivo.getValue().toString();
+		caselloController.setCaselloGlobalByName(p);
+		Casello partenza = Casello.getIstance();
+		caselloController.setCaselloGlobalByName(a);
+		
+		Casello arrivo = Casello.getIstance();
+		System.out.println("la partenza è =" + partenza.getNomeCasello() + partenza.getAltezzaKm() + "L'Arrivo è =" + arrivo.getNomeCasello()+ arrivo.getAltezzaKm());
+		if (partenza.getIdAutostrada() != arrivo.getIdAutostrada()) {
+			System.out.println("Le autostrade non sono la stessa");
+		}else {
+			if(!targa.getText().isEmpty()) {
+				if(veicoloController.veicoloPresente(targa.getText())) {
+					System.out.println("è presente");
+				}
+				
+			    
+			}
+}
+	}
 	
 
 }

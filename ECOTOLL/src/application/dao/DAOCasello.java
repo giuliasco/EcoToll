@@ -18,5 +18,7 @@ public interface DAOCasello {
 		public void updateCasello(Casello c);
 		
 		public boolean aggCasello (String nome_casello, double altezza_casello, int id_autostrada);
+		
+		public Casello getCaselloByName(String nome_casello);
 
 }

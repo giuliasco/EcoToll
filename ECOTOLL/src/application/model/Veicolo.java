@@ -8,6 +8,13 @@ public class Veicolo {
 	private int id,id_ci,id_ceu,id_utente;
 	private String targa;
 	
+	 private static Veicolo instance = null;
+		
+	    public static Veicolo getIstance() {
+	        if(instance==null)
+	                instance = new Veicolo();
+	        return instance;
+	    }
 	//Costruttore vuoto
 	public Veicolo() {}
 	
@@ -49,6 +56,11 @@ public class Veicolo {
 	
 	public String getTarga() {return targa;}
 	public void setTarga(String targa) {this.targa=targa;}
+	
+
+	 public void setglobal(Veicolo v) {
+	    	instance = v;
+	    }
 	
 	
 }
