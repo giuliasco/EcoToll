@@ -19,7 +19,7 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 	
 	private final String EXIT = "SELECT * FROM casello ORDER BY nome_casello asc";
 	private final String ADD_CASELLO = "INSERT INTO casello (nome_casello, altezza_km,id_autostrada) VALUES (?,?,?)";
-	private final String SELECT_INFOCASELLO = "SELECT * FROM casello WHERE id=?";
+	private final String SELECT_INFOCASELLO = "SELECT * FROM casello WHERE nome_casello=? AND altezza_km=?";
 	private final String DELETE_CASELLO= "DELETE FROM casello WHERE nome_casello=?";
 	private final String UPDATE_CASELLO="UPDATE casello SET nome_casello=? OR altezza_km=? WHERE id=?";
 
@@ -88,22 +88,27 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 
 	
 	@Override
-	public Casello getCasello(Casello c) {
+	public Casello getCasello(String nome_casello, double altezza_cassello) {
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(SELECT_INFOCASELLO);
-			  prep.setInt(1, c.getId());
+			  prep.setString(1, nome_casello);
+			  prep.setDouble(2, altezza_cassello);
 			  res = prep.executeQuery();
-			  if(res.next()) {
-				  return new Casello(res);
-			  }
+			  res.next();
+			  Casello c = new Casello(res);
+			  Casello c1 = Casello.getIstance();
+			  c1.setGlobal(c);
+			  return c1;
+			 
 	}
 		catch (SQLException e) {
 		e.printStackTrace(); 
 		System.out.println("Problema nel DB");
+		return null;
 		}
 	
-		return null;
+		
 	}
 
 
@@ -128,12 +133,12 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 	
 	
 	@Override
-	public boolean aggCasello(String nome_casello, String altezza_casello,int id_autostrada) {
+	public boolean aggCasello(String nome_casello, double altezza_casello,int id_autostrada) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep = (PreparedStatement) con.prepareStatement(ADD_CASELLO);
 			prep.setString(1, nome_casello);
-			prep.setString(2, altezza_casello);
+			prep.setDouble(2, altezza_casello);
 			prep.setInt(3, id_autostrada);
 			return prep.execute();
 		}

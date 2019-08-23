@@ -16,9 +16,9 @@ public class CaselloController {
 		casellodao = mysqlfactory.getDAOCasello();
 	}
 	
-	public Casello get(Casello c) {
+	/*public Casello get(Casello c) {
 		return mysqlfactory.getDAOCasello().getCasello(c);
-	}
+	}*/
 	
 	public List<Casello> getAllCas() {
 		return mysqlfactory.getDAOCasello().getAllCasello();
@@ -37,11 +37,11 @@ public class CaselloController {
 		return new CaselloController();
 	}
 	
-	/*public void setCaselloGlobal(String nome_casello, String altezza_casello, int id_autostrada) {
-		casellodao.aggCasello(nome_casello, altezza_casello, id_autostrada);	
-	}*/
+	public void setCaselloGlobal(String nome_casello, double altezza_casello) {
+		casellodao.getCasello(nome_casello, altezza_casello);	
+	}
 	
-	public boolean addCasello(String nome_casello, String altezza_casello, int id_autostrada ) {
+	public boolean addCasello(String nome_casello, double altezza_casello, int id_autostrada ) {
 		if(casellodao.aggCasello(nome_casello, altezza_casello, id_autostrada)) return true;
 		else return false;
 	}

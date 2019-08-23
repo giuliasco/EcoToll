@@ -9,7 +9,7 @@ public interface DAOCasello {
 	
 		public List<Casello> getAllCasello();
 	
-		public Casello getCasello(Casello c);
+		public Casello getCasello(String nome_casello, double altezza_casello );
 				
 		//public boolean addCasello(Casello c);
 		
@@ -17,6 +17,6 @@ public interface DAOCasello {
 		
 		public void updateCasello(Casello c);
 		
-		public boolean aggCasello (String nome_casello, String altezza_casello, int id_autostrada);
+		public boolean aggCasello (String nome_casello, double altezza_casello, int id_autostrada);
 
 }

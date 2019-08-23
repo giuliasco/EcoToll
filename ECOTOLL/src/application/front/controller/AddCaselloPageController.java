@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -29,6 +30,8 @@ public class AddCaselloPageController implements Initializable {
 	@FXML private TextField altezzaCasello;
 	@FXML private ComboBox<Autostrada> autostrada;
 	@FXML private Button bottoneAnnulla;
+	@FXML private Label messaggiVari ;
+	@FXML private Button bottoneAddCasello;
 	
 	
 	
@@ -54,6 +57,8 @@ public class AddCaselloPageController implements Initializable {
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			autostrada.setItems(this.elencoAutostrade);
+			
+			
 		}
 		
 		@FXML
@@ -87,25 +92,35 @@ public class AddCaselloPageController implements Initializable {
 			String x = autostrada.getValue().toString();
 			ac.setAutostradaGlobal(x);
 			Autostrada a = Autostrada.getInstance();
-			
-			System.out.println(a.getNomeAutostrada() +"    " +a.getId() +"CAZZOOOOO");
+			 final double d = Double.parseDouble(altezzaCasello.getText());
+			 final String s = nomeCasello.getText();
+		
+		
+			System.out.println(a.getNomeAutostrada() +" "+d+" "+s+"   " +a.getId() +"  CAZZOOOOO");
 			try {
-			if (nomeCasello.getText().isEmpty() || altezzaCasello.getText().isEmpty()) {
+			if (s==null || d == 0  ) {
+				messaggiVari.setText("Campi mancanti");
 					System.out.println("Campi mancanti");
+					
 			}else {
 				
-				casc.addCasello(nomeCasello.getText(), altezzaCasello.getText(), a.getId());
-				//casc.setCaselloGlobal(nomeCasello.getText(), altezzaCasello.getText(), a.getId()); DA RIVIDERE PERCHÈ È SBAGLIATO QUESTO COMPLETAMENTE!
+				casc.addCasello(nomeCasello.getText(), d, a.getId());
+				casc.setCaselloGlobal(nomeCasello.getText(), d); 
 				Casello c = Casello.getIstance();
-			        System.out.println("casello aggiunto" + c.getNomeCasello() );
+				messaggiVari.setText("Casello aggiunto con successo");
+				altezzaCasello.setText("");
+				nomeCasello.setText("");
+			        System.out.println(c.getNomeCasello());}
 					
-			}
+			
 			}catch(Exception e) {
 				e.printStackTrace();
 				System.out.println("Errore nel caricamento sul DB");
+				messaggiVari.setText("Inserire valore numerico in 'Altezza Casello'");
 			}
 				
 			}
+		
 			
 		}	
 		

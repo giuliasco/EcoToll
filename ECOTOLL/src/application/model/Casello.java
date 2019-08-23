@@ -55,6 +55,10 @@ public final class Casello {
 		public String toString() {
 			return this.nome_casello;
 		}
+		
+		public void setGlobal(Casello c) {
+			instance=c;
+		}
 	
 	}
 
