@@ -9,6 +9,7 @@ import application.controller.NormativaController;
 import application.controller.UtenteController;
 import application.controller.VeicoloController;
 import application.model.Casello;
+import application.model.Normativa;
 import application.model.Utente;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,6 +39,7 @@ public class UserPagePageController implements Initializable{
 	
 
 	Utente u=Utente.getIstance();
+	Normativa n = Normativa.getInstance();
 	
 	private ObservableList<Casello> caselloIn = FXCollections.observableArrayList();
 	private ObservableList<Casello> caselloOut = FXCollections.observableArrayList();
@@ -118,13 +120,13 @@ public class UserPagePageController implements Initializable{
 		caselloController.setCaselloGlobalByName(a);
 		
 		Casello arrivo = Casello.getIstance();
-		System.out.println("la partenza è =" + partenza.getNomeCasello() + partenza.getAltezzaKm() + "L'Arrivo è =" + arrivo.getNomeCasello()+ arrivo.getAltezzaKm());
+		System.out.println("la partenza =" + partenza.getNomeCasello() + partenza.getAltezzaKm() + "L'Arrivo =" + arrivo.getNomeCasello()+ arrivo.getAltezzaKm());
 		if (partenza.getIdAutostrada() != arrivo.getIdAutostrada()) {
-			System.out.println("Le autostrade non sono la stessa");
+			System.out.println("Non sono sulla stessa autostrada");
 		}else {
 			if(!targa.getText().isEmpty()) {
-				if(veicoloController.veicoloPresente(targa.getText())) {
-					System.out.println("è presente");
+				if(veicoloController.veicoloPresente(targa.getText().toUpperCase())) {
+					System.out.println("Presente");
 				}
 				
 			    
