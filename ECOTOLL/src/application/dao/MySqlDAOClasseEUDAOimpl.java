@@ -17,7 +17,6 @@ public class MySqlDAOClasseEUDAOimpl implements DAOClasseEU {
 	private ResultSet res = null;
 	
 	private final String CLASS_EU = "SELECT * FROM classe_europea";
-	private final String ADD_CLASSEU = "INSERT INTO classe_europea(tipo, aggiunta,id_normativa) VALUES (?,?,?)";
 	private final String SELECT_CLASSEUFROMIDNORMATIVA = "SELECT * FROM classe_europea WHERE id_normativa=?";
 
   
@@ -27,7 +26,6 @@ public class MySqlDAOClasseEUDAOimpl implements DAOClasseEU {
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(CLASS_EU);
-			 
 			  res = prep.executeQuery();
 			  while(res.next()) {
 				  ClasseEU classeeu=new ClasseEU();
@@ -37,8 +35,7 @@ public class MySqlDAOClasseEUDAOimpl implements DAOClasseEU {
 				  classeeu.setTipo(res.getString("tipo"));
 				  list.add(classeeu);
 			  }
-	}
-		catch (SQLException e) {
+		}catch (SQLException e) {
 		e.printStackTrace(); 
 		System.out.println("Problema nel DB");
 		}
@@ -46,23 +43,7 @@ public class MySqlDAOClasseEUDAOimpl implements DAOClasseEU {
 	}
 
 
-	@Override
-	public boolean addClasseEU(ClasseEU eu) {
-		try {
-			con = MySQLDAOFactory.createConnection();
-			prep = (PreparedStatement) con.prepareStatement(ADD_CLASSEU);
-			prep.setString(1, eu.getTipo());
-			prep.setDouble(2, eu.getAggiunta());
-			prep.setInt(3, eu.getIdNormativa());
-			
-			
-			return prep.execute();
-		}
-		catch (Exception e) {
-			System.out.println(e);
-		}
-		return false;
-	}
+
 
 	@Override
 	public ClasseEU getClasseEU(ClasseEU eu) {
@@ -74,12 +55,10 @@ public class MySqlDAOClasseEUDAOimpl implements DAOClasseEU {
 			  if(res.next()) {
 				  return new ClasseEU(res);
 			  }
-	}
-		catch (SQLException e) {
+		}catch (SQLException e) {
 		e.printStackTrace(); 
 		System.out.println("Problema nel DB");
 		}
-	
 		return null;
 	}
 

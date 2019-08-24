@@ -30,10 +30,12 @@ public class AutostradaController {
 		return autostradaDao.getAllAutostrade();
 	}
 	
+	//inizializza un nuovo oggetto autostrada a partire dal nome
 	public void setAutostradaGlobal(String nomea) {
 		autostradaDao.getAutostrada(nomea);
 	}
 
+	//inizializza un nuovo oggetto autostrada a partire dall'id
 	public void setAutostradaGlobalbyID(int id_autostrada) {
 		autostradaDao.getAutostradaById(id_autostrada);
 	}

@@ -11,7 +11,4 @@ import application.model.ClasseIT;
 	
 	public ClasseIT getClasseIT(int id);
 			
-	public boolean addClasseIT(ClasseIT it);
-
-
 }

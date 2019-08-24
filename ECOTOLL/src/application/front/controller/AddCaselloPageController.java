@@ -2,9 +2,7 @@ package application.front.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import application.controller.AutostradaController;
 import application.controller.CaselloController;
 import application.model.Autostrada;
@@ -39,9 +37,6 @@ public class AddCaselloPageController implements Initializable {
 	private Casello casello = new Casello();
 	private Autostrada autostradaselezionata  ;
 	private CaselloController casc = new CaselloController(); 
-	
-	
-	//PROVA NUOVO
 	private  AutostradaController ac = new AutostradaController();
 	
 	
@@ -52,22 +47,24 @@ public class AddCaselloPageController implements Initializable {
 	//costruttore
 		public AddCaselloPageController() {
 			elencoAutostrade.setAll(AutostradaController.getIstance().getAllAut());
-		}
+		}		
+		
 		
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			autostrada.setItems(this.elencoAutostrade);
-			
-			
 		}
 		
+
 		@FXML
 		public void getComboAutostrada(ActionEvent evt)  {
 			try{
 				autostradaselezionata=autostrada.getValue();
-			}catch(Exception e){System.out.println("CAZZOOOOOOO");}
- 
+			}catch(Exception e){
+				System.out.println("Errore");
+				}
 		}
+		
 		
 		@FXML
 		public void annulla (ActionEvent evt){
@@ -80,39 +77,33 @@ public class AddCaselloPageController implements Initializable {
 				primaryStage.setScene(scene);
 				primaryStage.show();		
 			}catch(Exception e){
+				System.out.println("Errore");
 				}
 			}
 		
 		
 		
 		@FXML 
-		
-	public void Aggiungi(ActionEvent evt) throws IOException {
+		public void Aggiungi(ActionEvent evt) throws IOException {
 			try {
 			String x = autostrada.getValue().toString();
 			ac.setAutostradaGlobal(x);
 			Autostrada a = Autostrada.getInstance();
-			 final double d = Double.parseDouble(altezzaCasello.getText());
-			 final String s = nomeCasello.getText();
-		
-		
-			System.out.println(a.getNomeAutostrada() +" "+d+" "+s+"   " +a.getId() +"  CAZZOOOOO");
-			
+			final double d = Double.parseDouble(altezzaCasello.getText());
+			final String s = nomeCasello.getText();
+			System.out.println(a.getNomeAutostrada() +" "+d+" "+s+"   " +a.getId());
 			if (s==null || d == 0  ) {
 				messaggiVari.setText("Campi mancanti");
-					System.out.println("Campi mancanti");
-					
+				System.out.println("Campi mancanti");
 			}else {
-				
 				casc.addCasello(nomeCasello.getText(), d, a.getId());
 				casc.setCaselloGlobal(nomeCasello.getText(), d); 
 				Casello c = Casello.getIstance();
 				messaggiVari.setText("Casello aggiunto con successo");
 				altezzaCasello.setText("");
 				nomeCasello.setText("");
-			        System.out.println(c.getNomeCasello());}
-					
-			
+				System.out.println(c.getNomeCasello());
+				}
 			}catch(Exception e) {
 				e.printStackTrace();
 				System.out.println("Errore nel caricamento sul DB");

@@ -15,15 +15,16 @@ public class VeicoloController {
 		veicolodao = mysqlfactory.getDAOVeicolo();
 				
 	}
+	
+	
 	public boolean veicoloPresente(String targa) {
 		if (veicolodao.veicoloPresente(targa)) return true;
 		return false;
 	}
 	
+	
 	public void setVeicolorGlobal(String targa) {
 		veicolodao.getVeicolo(targa);
-		
-	
 	}
 
 }

@@ -22,13 +22,13 @@ public class MySqlDAONormativaDAOimpl implements DAONormativa {
 	private static final String SELECT_NORMATIVA = "select * from normativa where id=1";
 	private static String SELECT_NOME_NORMATIVA = "select * FROM normativa WHERE nome_normativa =?";
 
+	
 	@Override
 	public List<Normativa> getAllNormative() {
 		List<Normativa> list = new ArrayList<>();
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(NORMATIVA);
-			 
 			  res = prep.executeQuery();
 			  while(res.next()) {
 				  Normativa normativa = new Normativa();
@@ -37,30 +37,15 @@ public class MySqlDAONormativaDAOimpl implements DAONormativa {
 				  normativa.setNomeNormativa(res.getString("nome_normativa"));
 				  list.add(normativa);
 			  }
-	}
-		catch (SQLException e) {
-		e.printStackTrace(); 
-		System.out.println("Problema nel DB");
+		}catch (SQLException e) {
+			e.printStackTrace(); 
+			System.out.println("Problema nel DB");
 		}
 		return list;
 	}
 
+	
 	@Override
-	public boolean addNormativa(Normativa n) {
-		try {
-			con = MySQLDAOFactory.createConnection();
-			prep = (PreparedStatement) con.prepareStatement(ADD_NORMATIVA);
-			prep.setString(1, n.getNomeNormativa());
-			prep.setDouble(2, n.getAnnoNormativa());
-	
-			return prep.execute();
-		}
-		catch (Exception e) {
-			System.out.println(e);
-		}
-		return false;
-	}
-	
 	public String getNormativa() {
 		Connection conn=null;
 		PreparedStatement pst=null;
@@ -69,16 +54,15 @@ public class MySqlDAONormativaDAOimpl implements DAONormativa {
 		try {
 			pst=conn.prepareStatement(SELECT_NORMATIVA);
 			rst=pst.executeQuery();
-			
 			if (rst.next()) {
 			return rst.getString("normativa");}
 			else return "Nessuna Normativa presente";
 		}catch (SQLException e)	{
 			e.printStackTrace();
 			return "Errore in SQL";
+			}
 	}
-
-	}
+	
 	
 	@Override
 	public Normativa getNomeNormativa(String nomex) {
@@ -96,8 +80,7 @@ public class MySqlDAONormativaDAOimpl implements DAONormativa {
 		}catch (SQLException e)	{
 			e.printStackTrace();
 			return null;
-	}
-
+		}
 	}
 
 

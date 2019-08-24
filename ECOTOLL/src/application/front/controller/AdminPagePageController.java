@@ -36,13 +36,11 @@ public class AdminPagePageController implements Initializable {
 	@FXML private Label normativaCorrente;
 	@FXML private Label labelBenvenuto;
 	
-	private CaselloController cc = new CaselloController();
-	
-	
 	
 	private ObservableList<Normativa> elencoNormative = FXCollections.observableArrayList();
 	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
 	private Normativa normativaselezionata = null;
+	private CaselloController cc = new CaselloController();
 	private NormativaController normativaController = new NormativaController();
 	Normativa n = Normativa.getInstance();
 	Utente u=Utente.getIstance();
@@ -101,19 +99,19 @@ public class AdminPagePageController implements Initializable {
 		}
 	
 	
+	@FXML
 	public void eliminaCasello(ActionEvent evt) {
 		caselloselezionato = caselli.getValue();
 		cc.delete(caselloselezionato);
 		caselli.getItems().remove(caselloselezionato);
 	}
 		
-		public void aggiornaNormativa (ActionEvent evt) {
+	@FXML	
+	public void aggiornaNormativa (ActionEvent evt) {
 		normativaselezionata=normativeDisponibili.getValue();
-		//System.out.println(normativaselezionata);
 		String x = normativaselezionata.toString();
 		normativaCorrente.setText(x);
 		normativaController.setNormativaGlobal(x);
-		
 		}
 			
 			

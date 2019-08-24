@@ -9,9 +9,6 @@ import application.model.ClasseEU;
 	
 	public List<ClasseEU> getAllClasseEU();
 	
-			
-	public boolean addClasseEU(ClasseEU eu);
-	
 	public ClasseEU getClasseEU(ClasseEU eu);
 			
 

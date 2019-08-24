@@ -33,59 +33,55 @@ public class RegistrationPageControll {
 	 
 	  
 	  @FXML 
-	
 	public void Registra(ActionEvent evt) throws IOException {
-	
 		if(!uc.login(email.getText(), password.getText())) {
-			
 			if (nome.getText().isEmpty() || cognome.getText().isEmpty() || email.getText().isEmpty() ||  password.getText().isEmpty()) {
-				giaPresente.setText("Campi mancanti");
+					giaPresente.setText("Campi mancanti");
 			}else {
 				uc.addUtente(nome.getText(),cognome.getText(),email.getText(),password.getText());
 				uc.setUserGlobal(email.getText(), password.getText());
 				((Node)evt.getSource()).getScene().getWindow().hide(); 
-		        	Stage primaryStage = new Stage();
-		        	FXMLLoader loader = new FXMLLoader();
-		        	Pane root=loader.load(getClass().getResource("/application/front/fxml/UserPage.fxml").openStream());
-		        	Scene scene = new Scene(root);          
-		        	primaryStage.setScene(scene);
-		        	primaryStage.show();
-		        	System.out.println("Utente registrato");
-				
+		       	Stage primaryStage = new Stage();
+		       	FXMLLoader loader = new FXMLLoader();
+		       	Pane root=loader.load(getClass().getResource("/application/front/fxml/UserPage.fxml").openStream());
+		       	Scene scene = new Scene(root);          
+		       	primaryStage.setScene(scene);
+		       	primaryStage.show();
+		       	System.out.println("Utente registrato");
+				}
+			}else {
+				giaPresente.setText("Utente già presente");
+				nome.setText("");
+				cognome.setText("");
+				email.setText("");
+				password.setText("");
 			}
-			}else {giaPresente.setText("Utente già presente");
-		nome.setText("");
-		cognome.setText("");
-		email.setText("");
-		password.setText("");
-		}
 		
 	}
 	
 	  
 	  @FXML
 	  public void Annulla(ActionEvent evt) throws IOException {
-		nome.setText("");
-		cognome.setText("");
-		email.setText("");
-		password.setText("");
-		giaPresente.setText("");
-	        	  
-		  
+		  nome.setText("");
+		  cognome.setText("");
+		  email.setText("");
+		  password.setText("");
+		  giaPresente.setText("");
 	  }
+
+	  
 	  @FXML
 	  public void indietro(ActionEvent evt) throws IOException {
 			try{((Node)evt.getSource()).getScene().getWindow().hide(); 
-			Stage primaryStage = new Stage();
-			FXMLLoader loader = new FXMLLoader();
-			Pane root=loader.load(getClass().getResource("/application/front/fxml/Login.fxml").openStream());
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		}catch(Exception e){
-			}
-	        	  
-		  
+				Stage primaryStage = new Stage();
+				FXMLLoader loader = new FXMLLoader();
+				Pane root=loader.load(getClass().getResource("/application/front/fxml/Login.fxml").openStream());
+				Scene scene = new Scene(root);
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			}catch(Exception e){
+				}
 	  }
+
 
 }

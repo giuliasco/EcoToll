@@ -21,7 +21,6 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 	private final String ADD_CASELLO = "INSERT INTO casello (nome_casello, altezza_km,id_autostrada) VALUES (?,?,?)";
 	private final String SELECT_INFOCASELLO = "SELECT * FROM casello WHERE nome_casello=? AND altezza_km=?";
 	private final String DELETE_CASELLO= "DELETE FROM casello WHERE nome_casello=?";
-	private final String UPDATE_CASELLO="UPDATE casello SET nome_casello=? OR altezza_km=? WHERE id=?";
 	private final String SELECT_INFOCASELLO_NAME = "SELECT * FROM casello WHERE nome_casello=?";
 
 
@@ -31,7 +30,6 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 			try {
 				  con = MySQLDAOFactory.createConnection();
 				  prep = (PreparedStatement) con.prepareStatement(EXIT);
-				 
 				  res = prep.executeQuery();
 				  while(res.next()) {
 					  Casello casello=new Casello();
@@ -41,36 +39,17 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 					  casello.setNomeCasello(res.getString("nome_casello"));
 					  list.add(casello);
 				  }
-		}
-			catch (SQLException e) {
-			e.printStackTrace(); 
-			System.out.println("Problema nel DB");
+			}catch (SQLException e) {
+				e.printStackTrace(); 
+				System.out.println("Problema nel DB");
 			}
-		
 			return list;
 		}
 	
 
 
 
-	@Override
-	/*public boolean addCasello(Casello c) {
-		try {
-			con = MySQLDAOFactory.createConnection();
-			prep = (PreparedStatement) con.prepareStatement(ADD_CASELLO);
-			prep.setString(1, c.getNomeCasello());
-			prep.setDouble(2, c.getAltezzaKm());
-			prep.setInt(3, c.getIdAutostrada());
-			
-			
-			return prep.execute();
-		}
-		catch (Exception e) {
-			System.out.println(e);
-		}
-		return false;
-		
-	}*/
+	
 	
 
 	public boolean deleteCasello(Casello c) {
@@ -79,12 +58,11 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 			  prep = (PreparedStatement) con.prepareStatement(DELETE_CASELLO);
 			  prep.setString(1, c.getNomeCasello());
 			return prep.execute();
-		} catch (SQLException e) {
+		}catch (SQLException e) {
 			e.printStackTrace(); 
 			System.out.println("Problema nel DB");
 			return false;
 			}
-		
 	}
 	
 
@@ -103,37 +81,14 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 			  c1.setGlobal(c);
 			  return c1;
 			 
-	}
-		catch (SQLException e) {
+		}catch (SQLException e) {
 		e.printStackTrace(); 
 		System.out.println("Problema nel DB");
 		return null;
 		}
-	
-		
 	}
 
 
-
-
-	@Override
-	public void updateCasello(Casello c) {
-		try {
-			con = MySQLDAOFactory.createConnection();
-			prep = (PreparedStatement) con.prepareStatement(UPDATE_CASELLO);
-	 		prep.setInt(1, c.getId());
-	 		prep.executeUpdate();
-
-			}
-			catch(SQLException e) {
-				e.printStackTrace(); 
-				System.out.println("Problema nel DB");
-				
-			}
-		
-	}
-	
-	
 	@Override
 	public boolean aggCasello(String nome_casello, double altezza_casello,int id_autostrada) {
 		try {
@@ -143,8 +98,7 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 			prep.setDouble(2, altezza_casello);
 			prep.setInt(3, id_autostrada);
 			return prep.execute();
-		}
-		catch (Exception e) {
+		}catch (Exception e) {
 			System.out.println(e);
 		}
 		return false;
@@ -165,9 +119,7 @@ public class MySqlDAOCaselloDAOimpl implements DAOCasello {
 			  Casello c1 = Casello.getIstance();
 			  c1.setGlobal(c);
 			  return c1;
-			 
-	}
-		catch (SQLException e) {
+		}catch (SQLException e) {
 		e.printStackTrace(); 
 		System.out.println("Problema nel DB");
 		return null;

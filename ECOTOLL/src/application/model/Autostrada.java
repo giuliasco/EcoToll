@@ -8,8 +8,8 @@ public final class Autostrada {
 	private int id;
 	private double km,tariffa_km;
 	private String nome_autostrada,inizio,fine;
-	
 	public static Autostrada instance = null;
+	
 	
 	public static Autostrada getInstance() {
 		if(instance==null) instance = new Autostrada();
@@ -17,9 +17,7 @@ public final class Autostrada {
 	}
 	
 	//costruttore vuoto
-	
 	public Autostrada() {}
-	
 	
 	
 	//costruttore che contiene tutti i campi

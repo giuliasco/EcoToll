@@ -44,7 +44,7 @@ public class UserPagePageController implements Initializable{
 	@FXML private Button indietro;
 	
 
-	Utente u=Utente.getIstance();
+	Utente u = Utente.getIstance();
 	Normativa n = Normativa.getInstance();
 	
 	private ObservableList<Casello> caselloIn = FXCollections.observableArrayList();
@@ -65,37 +65,6 @@ public class UserPagePageController implements Initializable{
 	
 	
 
-	 @FXML 
-	  public void logout (ActionEvent evt){
-		try {
-			((Node)evt.getSource()).getScene().getWindow().hide(); 
-			Stage primaryStage = new Stage();
-			FXMLLoader loader = new FXMLLoader();
-			Pane root=loader.load(getClass().getResource("/application/front/fxml/Login.fxml").openStream());
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		}catch(Exception e){
-			}
-		}
-	 
-	 
-	 @FXML 
-	  public void indietro (ActionEvent evt){
-		try {
-			((Node)evt.getSource()).getScene().getWindow().hide(); 
-			Stage primaryStage = new Stage();
-			FXMLLoader loader = new FXMLLoader();
-			Pane root=loader.load(getClass().getResource("/application/front/fxml/AdminPage.fxml").openStream());
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		}catch(Exception e){
-			}
-		}
-
-
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if (u.getIdRuolo()==2) {indietro.setVisible(true);
@@ -113,22 +82,56 @@ public class UserPagePageController implements Initializable{
 	}
 	
 	
+	 @FXML 
+	  public void logout (ActionEvent evt){
+		try {
+			((Node)evt.getSource()).getScene().getWindow().hide(); 
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root=loader.load(getClass().getResource("/application/front/fxml/Login.fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		}catch(Exception e){
+			System.out.println("Errore");
+			}
+		}
+	 
+	 
+	 @FXML 
+	  public void indietro (ActionEvent evt){
+		try {
+			((Node)evt.getSource()).getScene().getWindow().hide(); 
+			Stage primaryStage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			Pane root=loader.load(getClass().getResource("/application/front/fxml/AdminPage.fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		}catch(Exception e){
+			System.out.println("Errore");
+			}
+		}
+
+
+
+	
+	
+	
 	@FXML
 	public void getComboCaselli(ActionEvent evt) {
 		caselloSelezionatop=partenza.getValue();
 		caselloSelezionatoa=arrivo.getValue();
-		
 	}
+
 	
 	@FXML
 	public void calcolaPedaggio (ActionEvent evt){
-		
 		String p = partenza.getValue().toString();
 		String a = arrivo.getValue().toString();
 		caselloController.setCaselloGlobalByName(p);
 		Casello partenza = Casello.getIstance();
 		caselloController.setCaselloGlobalByName(a);
-		
 		Casello arrivo = Casello.getIstance();
 		System.out.println("la partenza =" + partenza.getNomeCasello() + partenza.getAltezzaKm() + "L'Arrivo =" + arrivo.getNomeCasello()+ arrivo.getAltezzaKm());
 		if (partenza.getIdAutostrada() != arrivo.getIdAutostrada()) {
@@ -136,35 +139,34 @@ public class UserPagePageController implements Initializable{
 		}else {
 			if(!targa.getText().isEmpty()) {
 				if(veicoloController.veicoloPresente(targa.getText().toUpperCase())) {
-					System.out.println("Presente");
-					if (n.getId()==1) {
+					String nome="italiana";
+					String nomeNorm = n.getNomeNormativa();
+					System.out.println(nome + nomeNorm);
+					if (nomeNorm.equalsIgnoreCase(nome)) {
 						veicoloController.setVeicolorGlobal(targa.getText());
 						Veicolo v = Veicolo.getIstance();
 						classeItController.setClasseItGlobal(v.getIdCi());
 						ClasseIT ci = ClasseIT.getIstance();
-						System.out.println(ci.getTipo());
 						autostradaController.setAutostradaGlobalbyID(partenza.getIdAutostrada());
 						Autostrada aut = Autostrada.getInstance();
-						System.out.println(aut.getNomeAutostrada());
-						double altezza_p= partenza.getAltezzaKm();
-						double altezza_a=arrivo.getAltezzaKm();
-						double diff = altezza_a - altezza_p;
-						double ass= (Math.abs(diff));
-						double tariffa_km = aut.getTariffaKm();
-						double prezzo = ass*tariffa_km;
-						System.out.println(prezzo);
-						double percentuale = (22*prezzo)/100;
-						System.out.println(percentuale);
-						double pedaggio=(Math.round((prezzo + percentuale + ci.getAggiunta())*10))/10.0;
+						double pedaggio=(Math.round(((Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm() + (22*(Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm())/100 + ci.getAggiunta())*10))/10.0;
+						/*PASSAGGI CHE ABBIAMO INIZIALMENTE UTILIZZATO PER ARRIVARE A CALCOLARE IL PARAMETRO PEDAGGIO
+						 * double altezza_p= partenza.getAltezzaKm();
+						//double altezza_a=arrivo.getAltezzaKm();
+						//double diff = arrivo.getAltezzaKm() - partenza.getAltezzaKm();
+						//double ass= (Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()));
+						//double tariffa_km = aut.getTariffaKm();
+						//double prezzo = (Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm();
+						double percentuale = (22*(Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm())/100;*/
 						String totale=Double.toString(pedaggio);
 						totalePedaggio.setText(totale + "  €");
+				}else {
+					System.out.println("Errore");
 				}
-				
-			    
 			}
-}
-	}
+			}
+		}
+		}
 	
-	}
 }
 

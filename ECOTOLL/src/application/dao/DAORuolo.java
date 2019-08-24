@@ -6,8 +6,7 @@ import application.model.Ruolo;
 
 public interface DAORuolo {
 	
-	public List<Ruolo> getAllRuoli();
-	public boolean addRuolo(Ruolo r);
+
 	
 	
 
