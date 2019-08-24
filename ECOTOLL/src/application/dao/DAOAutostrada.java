@@ -10,5 +10,6 @@ public interface DAOAutostrada {
 	public int getIdAutostrada(Autostrada a);
 	public boolean addAutostrada(Autostrada a);
 	public List<Autostrada> getAllAutostrade();
+	public Autostrada getAutostradaById(int id_autostrada);
 
 }

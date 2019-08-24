@@ -9,7 +9,7 @@ import application.model.ClasseIT;
 	
 	public List<ClasseIT> getAllClasseIT();
 	
-	public ClasseIT getClasseIT(ClasseIT it);
+	public ClasseIT getClasseIT(int id);
 			
 	public boolean addClasseIT(ClasseIT it);
 

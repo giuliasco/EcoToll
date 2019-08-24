@@ -2,15 +2,21 @@ package application.front.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import application.controller.CaselloController;
+import application.controller.ClasseItController;
 import application.controller.NormativaController;
 import application.controller.UtenteController;
 import application.controller.VeicoloController;
+import application.controller.AutostradaController;
 import application.model.Casello;
+import application.model.ClasseIT;
 import application.model.Normativa;
 import application.model.Utente;
+import application.model.Veicolo;
+import application.model.Autostrada;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,6 +53,8 @@ public class UserPagePageController implements Initializable{
 	private Casello caselloSelezionatoa;
 	private CaselloController caselloController = new CaselloController();
 	private VeicoloController veicoloController = new VeicoloController();
+	private ClasseItController classeItController = new ClasseItController();
+	private AutostradaController autostradaController = new AutostradaController();
 	
 	
 	//costruttore
@@ -91,15 +99,17 @@ public class UserPagePageController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if (u.getIdRuolo()==2) {indietro.setVisible(true);
-		//labelBenvenuto.setText("Benvenuto Admin " + u.getNomeUtente().toUpperCase());
+		labelBenvenuto.setText("Benvenuto Admin " + u.getNomeUtente().toUpperCase());
 		partenza.setItems(this.caselloIn);
 		arrivo.setItems(this.caselloOut);
+		System.out.println("La normativa è " + n.getNomeNormativa());
 		}
 		else {
 		indietro.setVisible(false);
-		//labelBenvenuto.setText("Benvenuto " + u.getNomeUtente().toUpperCase());
+		labelBenvenuto.setText("Benvenuto " + u.getNomeUtente().toUpperCase());
 		partenza.setItems(this.caselloIn);
-		arrivo.setItems(this.caselloOut);}
+		arrivo.setItems(this.caselloOut);
+		System.out.println("La normativa è " + n.getNomeNormativa());}
 	}
 	
 	
@@ -127,6 +137,27 @@ public class UserPagePageController implements Initializable{
 			if(!targa.getText().isEmpty()) {
 				if(veicoloController.veicoloPresente(targa.getText().toUpperCase())) {
 					System.out.println("Presente");
+					if (n.getId()==1) {
+						veicoloController.setVeicolorGlobal(targa.getText());
+						Veicolo v = Veicolo.getIstance();
+						classeItController.setClasseItGlobal(v.getIdCi());
+						ClasseIT ci = ClasseIT.getIstance();
+						System.out.println(ci.getTipo());
+						autostradaController.setAutostradaGlobalbyID(partenza.getIdAutostrada());
+						Autostrada aut = Autostrada.getInstance();
+						System.out.println(aut.getNomeAutostrada());
+						double altezza_p= partenza.getAltezzaKm();
+						double altezza_a=arrivo.getAltezzaKm();
+						double diff = altezza_a - altezza_p;
+						double ass= (Math.abs(diff));
+						double tariffa_km = aut.getTariffaKm();
+						double prezzo = ass*tariffa_km;
+						System.out.println(prezzo);
+						double percentuale = (22*prezzo)/100;
+						System.out.println(percentuale);
+						double pedaggio=(Math.round((prezzo + percentuale + ci.getAggiunta())*10))/10.0;
+						String totale=Double.toString(pedaggio);
+						totalePedaggio.setText(totale + "  €");
 				}
 				
 			    
@@ -134,5 +165,6 @@ public class UserPagePageController implements Initializable{
 }
 	}
 	
-
+	}
 }
+

@@ -9,6 +9,16 @@ public class ClasseIT {
 	private double aggiunta;
 	private String tipo;
 	
+	
+	 private static ClasseIT instance = null;
+		
+	    public static ClasseIT getIstance() {
+	        if(instance==null)
+	                instance = new ClasseIT();
+	        return instance;
+	}
+	    
+	    
 	public ClasseIT() {}
 	
 	public ClasseIT(int id,int id_normativa,double aggiunta,String tipo) {
@@ -36,5 +46,9 @@ public class ClasseIT {
 	
 	public String getTipo() {return tipo;}
 	public void setTipo(String tipo) {this.tipo=tipo;}
+	
+	 public void setglobal(ClasseIT classeIt) {
+	    	instance = classeIt;
+	    }
 
 }

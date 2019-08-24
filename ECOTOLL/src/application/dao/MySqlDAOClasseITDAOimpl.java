@@ -18,7 +18,7 @@ public class MySqlDAOClasseITDAOimpl implements DAOClasseIT{
 	
 	private final String CLASS_IT = "SELECT * FROM classe_italiana";
 	private final String ADD_CLASSIT = "INSERT INTO classe_italiana(tipo, aggiunta,id_normativa) VALUES (?,?,?)";
-	private final String SELECT_CLASSITFROMIDNORMATIVA = "SELECT * FROM classe_italiana WHERE id_normativa=?";
+	private final String SELECT_CLASSEIT_FROM_ID = "SELECT * FROM classe_italiana WHERE id=?";
 
 
 	@Override
@@ -47,15 +47,19 @@ public class MySqlDAOClasseITDAOimpl implements DAOClasseIT{
 	}
 
 	@Override
-	public ClasseIT getClasseIT(ClasseIT it) {
+	public ClasseIT getClasseIT(int id) {
 		try {
 			  con = MySQLDAOFactory.createConnection();
-			  prep = (PreparedStatement) con.prepareStatement(SELECT_CLASSITFROMIDNORMATIVA);
-			  prep.setInt(1, it.getIdNormativa());
+			  prep = (PreparedStatement) con.prepareStatement(SELECT_CLASSEIT_FROM_ID);
+			  prep.setInt(1, id);
 			  res = prep.executeQuery();
-			  if(res.next()) {
-				  return new ClasseIT(res);
-			  }
+			  res.next(); 
+			  ClasseIT ci =new ClasseIT(res);
+			  ClasseIT ci1 = ClasseIT.getIstance();
+			  ci1.setglobal(ci);
+			  return ci1;
+			  
+			  
 	}
 		catch (SQLException e) {
 		e.printStackTrace(); 

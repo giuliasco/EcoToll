@@ -19,6 +19,7 @@ public class MySqlDAOAutostradaDAOimpl implements DAOAutostrada {
 	private final String INSERT_AUTOSTRADA ="INSERT INTO autostrada (nome_autostrada, inizio, fine, km, tariffa_km) values ('?,?,?,?,?)";
 	private final String SELECT_INFO_AUTOSTRADA = "SELECT * FROM autostrada WHERE nome_autostrada=?";
 	private final String HIGHWAY = "SELECT * FROM autostrada";
+	private final String HIGHWAY_BY_ID = "SELECT * FROM autostrada WHERE id=?";
 
 		
 	
@@ -116,6 +117,28 @@ public class MySqlDAOAutostradaDAOimpl implements DAOAutostrada {
 	
 		
 		}
+
+	@Override
+	public Autostrada getAutostradaById(int id_autostrada) {
+		try {
+			con = MySQLDAOFactory.createConnection();
+			prep = (PreparedStatement) con.prepareStatement(HIGHWAY_BY_ID);
+			prep.setInt(1, id_autostrada);
+			res = prep.executeQuery();
+			res.next();
+			Autostrada a = new Autostrada(res);
+			Autostrada a1= Autostrada.getInstance();
+			a1.setGlobal(a);
+			return a1;
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace(); 
+			System.out.println("Problema nel DB");
+			return null;
+		}
+		
+	}
 }
 		
 	

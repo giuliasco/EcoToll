@@ -34,4 +34,7 @@ public class AutostradaController {
 		autostradaDao.getAutostrada(nomea);
 	}
 
+	public void setAutostradaGlobalbyID(int id_autostrada) {
+		autostradaDao.getAutostradaById(id_autostrada);
+	}
 }
