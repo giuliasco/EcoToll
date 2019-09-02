@@ -32,7 +32,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class UserPagePageController implements Initializable{
+public class PedaggioPageController implements Initializable{
 	
 	@FXML private ComboBox<Casello> partenza;
 	@FXML private ComboBox<Casello> arrivo;
@@ -58,7 +58,7 @@ public class UserPagePageController implements Initializable{
 	
 	
 	//costruttore
-	public UserPagePageController() {
+	public PedaggioPageController() {
 		caselloIn.setAll(CaselloController.getIstance().getAllCas());
 		caselloOut.setAll(CaselloController.getIstance().getAllCas());
 	}
@@ -71,14 +71,14 @@ public class UserPagePageController implements Initializable{
 		labelBenvenuto.setText("Benvenuto Admin " + u.getNomeUtente().toUpperCase());
 		partenza.setItems(this.caselloIn);
 		arrivo.setItems(this.caselloOut);
-		System.out.println("La normativa è " + n.getNomeNormativa());
+		System.out.println("La normativa e' " + n.getNomeNormativa());
 		}
 		else {
 		indietro.setVisible(false);
 		labelBenvenuto.setText("Benvenuto " + u.getNomeUtente().toUpperCase());
 		partenza.setItems(this.caselloIn);
 		arrivo.setItems(this.caselloOut);
-		System.out.println("La normativa è " + n.getNomeNormativa());}
+		System.out.println("La normativa e'" + n.getNomeNormativa());}
 	}
 	
 	
@@ -139,7 +139,7 @@ public class UserPagePageController implements Initializable{
 		}else {
 			if(!targa.getText().isEmpty()) {
 				if(veicoloController.veicoloPresente(targa.getText().toUpperCase())) {
-					String nome="italiana-2019";
+					String nome="italiana";
 					String nomeNorm = n.getNomeNormativa();
 					System.out.println(nome + nomeNorm);
 					if (nomeNorm.equalsIgnoreCase(nome)) {
@@ -159,7 +159,7 @@ public class UserPagePageController implements Initializable{
 						//double prezzo = (Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm();
 						double percentuale = (22*(Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm())/100;*/
 						String totale=Double.toString(pedaggio);
-						totalePedaggio.setText(totale + "  €");
+						totalePedaggio.setText(totale + "  euro");
 				}else {
 					System.out.println("Errore");
 				}

@@ -59,7 +59,10 @@ public class AdminPagePageController implements Initializable {
 			@Override
 			public void initialize(URL location, ResourceBundle resources) {
 				normativeDisponibili.setItems(this.elencoNormative);
-				normativaCorrente.setText(n.getNomeNormativa() + "   " + n.getAnnoNormativa());
+				if(n.getNomeNormativa() == null) {
+					normativaCorrente.setText("");
+				} else {
+				normativaCorrente.setText(n.getNomeNormativa() + "   " + n.getAnnoNormativa());}
 				labelBenvenuto.setText("Benvenuto Admin " + u.getNomeUtente().toUpperCase());
 				caselli.setItems(this.elencoCaselli);
 				tipoNormativa.setItems(tipi);
@@ -104,7 +107,7 @@ public class AdminPagePageController implements Initializable {
 			((Node)evt.getSource()).getScene().getWindow().hide(); 
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			Pane root=loader.load(getClass().getResource("/application/front/fxml/UserPage.fxml").openStream());
+			Pane root=loader.load(getClass().getResource("/application/front/fxml/Pedaggio.fxml").openStream());
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
