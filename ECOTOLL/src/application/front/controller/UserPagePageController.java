@@ -139,7 +139,7 @@ public class UserPagePageController implements Initializable{
 		}else {
 			if(!targa.getText().isEmpty()) {
 				if(veicoloController.veicoloPresente(targa.getText().toUpperCase())) {
-					String nome="italiana";
+					String nome="italiana-2019";
 					String nomeNorm = n.getNomeNormativa();
 					System.out.println(nome + nomeNorm);
 					if (nomeNorm.equalsIgnoreCase(nome)) {

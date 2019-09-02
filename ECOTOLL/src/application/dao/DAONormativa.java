@@ -8,11 +8,11 @@ import application.model.Normativa;
 
 public interface DAONormativa {
 	
-	public List<Normativa> getAllNormative();
+	public List<Normativa> getAllNormative(String nome_normativa);
 	
 	public String getNormativa();
 	
-	public Normativa getNomeNormativa(String nomex);
+	public Normativa getNomeNormativa(String annox);
 
 	
 

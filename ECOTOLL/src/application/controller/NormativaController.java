@@ -29,12 +29,12 @@ public class NormativaController {
 	
 	
 	//Lista di normative
-	public List<Normativa> getAllNorm() {
-		return normativadao.getAllNormative();
+	public List<Normativa> getAllNorm(String nome_normativa) {
+		return normativadao.getAllNormative(nome_normativa);
 	}
 		
-	public void setNormativaGlobal(String nomex) {
-		normativadao.getNomeNormativa(nomex);
+	public void setNormativaGlobal(String annox) {
+		normativadao.getNomeNormativa(annox);
 		}
 	
 		

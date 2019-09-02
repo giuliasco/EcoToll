@@ -2,6 +2,7 @@ package application.front.controller;
 
 
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 
@@ -27,6 +28,7 @@ import javafx.stage.Stage;
 public class AdminPagePageController implements Initializable {
 	
 	@FXML private ComboBox<Normativa> normativeDisponibili;
+	@FXML private ComboBox tipoNormativa; 
 	@FXML private Button bottoneAggiornaNormativa;
 	@FXML private ComboBox<Casello> caselli;
 	@FXML private Button bottoneEliminaCasello;
@@ -39,26 +41,33 @@ public class AdminPagePageController implements Initializable {
 	
 	private ObservableList<Normativa> elencoNormative = FXCollections.observableArrayList();
 	private ObservableList<Casello> elencoCaselli = FXCollections.observableArrayList();
-	private Normativa normativaselezionata = null;
+	private ObservableList<String> tipi = FXCollections.observableArrayList("Italiana","Europea");
+	private Normativa normativaselezionata;
+	private String nomeSelezionato;
 	private CaselloController cc = new CaselloController();
 	private NormativaController normativaController = new NormativaController();
 	Normativa n = Normativa.getInstance();
 	Utente u=Utente.getIstance();
 	private Casello caselloselezionato = null;
 	
-	
 	//costruttore
 			public AdminPagePageController() {
-				elencoNormative.setAll(NormativaController.getIstance().getAllNorm());
+				
 				elencoCaselli.setAll(CaselloController.getIstance().getAllCas());
 			}
 			
 			@Override
 			public void initialize(URL location, ResourceBundle resources) {
 				normativeDisponibili.setItems(this.elencoNormative);
-				normativaCorrente.setText(n.getNomeNormativa());
+				normativaCorrente.setText(n.getNomeNormativa() + "   " + n.getAnnoNormativa());
 				labelBenvenuto.setText("Benvenuto Admin " + u.getNomeUtente().toUpperCase());
 				caselli.setItems(this.elencoCaselli);
+				tipoNormativa.setItems(tipi);
+			Iterator<String> I =	tipi.iterator();
+			while(I.hasNext()) {
+				System.out.println(I.next());
+			}
+				System.out.println(tipi);
 			}
 			
 			public void getComboCaselli(ActionEvent evt) {
@@ -68,6 +77,11 @@ public class AdminPagePageController implements Initializable {
 			public void getComboNormative(ActionEvent evt) {
 				normativaselezionata=normativeDisponibili.getValue();
 				}
+			
+			
+			public void update (ActionEvent evt) {
+				elencoNormative.setAll(NormativaController.getIstance().getAllNorm((String) tipoNormativa.getSelectionModel().getSelectedItem()));
+			}
 	
 	
 	public void logout (ActionEvent evt){
@@ -108,9 +122,10 @@ public class AdminPagePageController implements Initializable {
 		
 	@FXML	
 	public void aggiornaNormativa (ActionEvent evt) {
-		normativaselezionata=normativeDisponibili.getValue();
+	    normativaselezionata=normativeDisponibili.getValue();
 		String x = normativaselezionata.toString();
-		normativaCorrente.setText(x);
+		//System.out.println(normativaselezionata.getNomeNormativa() + normativaselezionata.getAnnoNormativa());
+		normativaCorrente.setText(normativaselezionata.getNomeNormativa() + "   " + normativaselezionata.getAnnoNormativa());
 		normativaController.setNormativaGlobal(x);
 		}
 			

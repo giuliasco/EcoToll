@@ -17,23 +17,23 @@ public class MySqlDAONormativaDAOimpl implements DAONormativa {
 	private PreparedStatement prep=null;
 	private ResultSet res = null;
 	
-	private final String NORMATIVA = "SELECT * FROM normativa";
-	private final String ADD_NORMATIVA = "INSERT INTO normativa(nome_normativa, anno_normativa) VALUES (?,?)";
+	private final String NORMATIVA = "SELECT * FROM normativa WHERE nome_normativa=?";
 	private static final String SELECT_NORMATIVA = "select * from normativa where id=1";
-	private static String SELECT_NOME_NORMATIVA = "select * FROM normativa WHERE nome_normativa =?";
+	private static String SELECT_NOME_NORMATIVA = "select * FROM normativa WHERE anno_normativa =?";
 
 	
 	@Override
-	public List<Normativa> getAllNormative() {
+	public List<Normativa> getAllNormative(String nome_normativa) {
 		List<Normativa> list = new ArrayList<>();
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(NORMATIVA);
+			  prep.setString(1, nome_normativa);
 			  res = prep.executeQuery();
 			  while(res.next()) {
 				  Normativa normativa = new Normativa();
 				  normativa.setId(res.getInt("id"));
-				  normativa.setAnnoNormativa(res.getInt("anno_normativa"));
+				  normativa.setAnnoNormativa(res.getString("anno_normativa"));
 				  normativa.setNomeNormativa(res.getString("nome_normativa"));
 				  list.add(normativa);
 			  }
@@ -65,11 +65,11 @@ public class MySqlDAONormativaDAOimpl implements DAONormativa {
 	
 	
 	@Override
-	public Normativa getNomeNormativa(String nomex) {
+	public Normativa getNomeNormativa(String annox) {
 		try {
 			con = MySQLDAOFactory.createConnection();
 			prep=(PreparedStatement) con.prepareStatement(SELECT_NOME_NORMATIVA);
-			prep.setString(1, nomex);
+			prep.setString(1, annox);
 			res = prep.executeQuery();
 			res.next();		
 			Normativa n =new Normativa(res);
