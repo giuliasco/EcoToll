@@ -1,10 +1,12 @@
 package application.front.controller;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
 
 import application.controller.CaselloController;
 import application.controller.NormativaController;
@@ -73,6 +75,9 @@ public class AdminPagePageController implements Initializable {
 				System.out.println(tipi);
 			}
 			
+			
+			
+			
 			public void getComboCaselli(ActionEvent evt) {
 				caselloselezionato=caselli.getValue();
 			}
@@ -87,7 +92,7 @@ public class AdminPagePageController implements Initializable {
 			}
 	
 	
-	public void logout (ActionEvent evt){
+	public void logout (ActionEvent evt) throws IOException{
 		try {
 			((Node)evt.getSource()).getScene().getWindow().hide(); 
 			Stage primaryStage = new Stage();
@@ -97,12 +102,15 @@ public class AdminPagePageController implements Initializable {
 			primaryStage.setScene(scene);
 			primaryStage.show();		
 		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Errore logout!");
+			JOptionPane.showMessageDialog(null, "Errore logout. Riprova.");
 			}
 		}
 	
 	
 	@FXML 
-	  public void openUserPage (ActionEvent evt){
+	  public void openPedaggio (ActionEvent evt) throws IOException{
 		try {
 			((Node)evt.getSource()).getScene().getWindow().hide(); 
 			Stage primaryStage = new Stage();
@@ -112,28 +120,44 @@ public class AdminPagePageController implements Initializable {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Errore apertura Pedaggio");
 			}
 		}
 	
 	
 	@FXML
-	public void eliminaCasello(ActionEvent evt) {
+	public void eliminaCasello(ActionEvent evt) throws IOException {
+		try{
 		caselloselezionato = caselli.getValue();
 		cc.delete(caselloselezionato);
-		caselli.getItems().remove(caselloselezionato);
+		caselli.getItems().remove(caselloselezionato);}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Errore eliminazione casello");
+			JOptionPane.showMessageDialog(null, "Errore eliminazione casello. Riprova");
+		}
+	
 	}
 		
 	@FXML	
-	public void aggiornaNormativa (ActionEvent evt) {
-	    normativaselezionata=normativeDisponibili.getValue();
+	public void aggiornaNormativa (ActionEvent evt) throws IOException{
+	    try {
+		normativaselezionata=normativeDisponibili.getValue();
 		String x = normativaselezionata.toString();
 		//System.out.println(normativaselezionata.getNomeNormativa() + normativaselezionata.getAnnoNormativa());
 		normativaCorrente.setText(normativaselezionata.getNomeNormativa() + "   " + normativaselezionata.getAnnoNormativa());
 		normativaController.setNormativaGlobal(x);
 		}
+	    catch(Exception e) {
+	    	e.printStackTrace();
+	    	System.out.println("Errore aggiornamento normativa");
+	    	JOptionPane.showMessageDialog(null, "Errore aggiornamento normativa. Riprova");
+	    	
+	    }}
 			
 			
-		public void openAddCasello (ActionEvent evt){
+		public void openAddCasello (ActionEvent evt) throws IOException {
 			try {
 				((Node)evt.getSource()).getScene().getWindow().hide(); 
 				Stage primaryStage = new Stage();
@@ -143,6 +167,8 @@ public class AdminPagePageController implements Initializable {
 				primaryStage.setScene(scene);
 				primaryStage.show();		
 			}catch(Exception e){
+				e.printStackTrace();
+				System.out.println("Errore apertura CaselloPage");
 				}
 			}
 }

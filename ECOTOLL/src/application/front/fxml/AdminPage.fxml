@@ -57,7 +57,7 @@
          </effect>
       </Label>
       <Separator layoutX="333.0" layoutY="63.0" orientation="VERTICAL" prefHeight="200.0" />
-      <Button fx:id="bottoneCalcolaPedaggio" layoutX="217.0" layoutY="310.0" mnemonicParsing="false" onAction="#openUserPage" prefHeight="59.0" prefWidth="236.0" text="Calcola Pedaggio" textFill="#41d664">
+      <Button fx:id="bottoneCalcolaPedaggio" layoutX="217.0" layoutY="310.0" mnemonicParsing="false" onAction="#openPedaggio" prefHeight="59.0" prefWidth="236.0" text="Calcola Pedaggio" textFill="#41d664">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

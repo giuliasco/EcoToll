@@ -34,6 +34,7 @@ public class RegistrationPageControll {
 	  
 	  @FXML 
 	public void Registra(ActionEvent evt) throws IOException {
+		  try {
 		if(!uc.login(email.getText(), password.getText())) {
 			if (nome.getText().isEmpty() || cognome.getText().isEmpty() || email.getText().isEmpty() ||  password.getText().isEmpty()) {
 					giaPresente.setText("Campi mancanti");
@@ -50,23 +51,31 @@ public class RegistrationPageControll {
 		       	System.out.println("Utente registrato");
 				}
 			}else {
-				giaPresente.setText("Utente gi√† presente");
+				giaPresente.setText("Utente gia'† presente");
 				nome.setText("");
 				cognome.setText("");
 				email.setText("");
 				password.setText("");
-			}
+			}}
+		  catch (Exception e) {
+			  System.out.println("Errore");
+		  }
 		
 	}
 	
 	  
 	  @FXML
 	  public void Annulla(ActionEvent evt) throws IOException {
+		  try{
 		  nome.setText("");
 		  cognome.setText("");
 		  email.setText("");
 		  password.setText("");
 		  giaPresente.setText("");
+		  }
+		  catch (Exception e) {
+			  System.out.println("Errore");
+		  }
 	  }
 
 	  
@@ -80,6 +89,7 @@ public class RegistrationPageControll {
 				primaryStage.setScene(scene);
 				primaryStage.show();
 			}catch(Exception e){
+				System.out.println("Errore");
 				}
 	  }
 

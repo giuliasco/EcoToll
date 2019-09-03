@@ -3,6 +3,9 @@ package application.front.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
+
 import application.controller.AutostradaController;
 import application.controller.CaselloController;
 import application.model.Autostrada;
@@ -35,12 +38,9 @@ public class AddCaselloPageController implements Initializable {
 	
 	private ObservableList<Autostrada> elencoAutostrade = FXCollections.observableArrayList();
 	private Casello casello = new Casello();
-	private Autostrada autostradaselezionata  ;
+	private Autostrada autostradaselezionata;
 	private CaselloController casc = new CaselloController(); 
 	private  AutostradaController ac = new AutostradaController();
-	
-	
-	
 	
 	
 	
@@ -62,12 +62,13 @@ public class AddCaselloPageController implements Initializable {
 				autostradaselezionata=autostrada.getValue();
 			}catch(Exception e){
 				System.out.println("Errore");
+				e.printStackTrace();
 				}
 		}
 		
 		
 		@FXML
-		public void annulla (ActionEvent evt){
+		public void annulla (ActionEvent evt) throws IOException{
 			try {
 				((Node)evt.getSource()).getScene().getWindow().hide(); 
 				Stage primaryStage = new Stage();
@@ -77,7 +78,8 @@ public class AddCaselloPageController implements Initializable {
 				primaryStage.setScene(scene);
 				primaryStage.show();		
 			}catch(Exception e){
-				System.out.println("Errore");
+				System.out.println("Errore Annullamento");
+				e.printStackTrace();
 				}
 			}
 		
@@ -108,6 +110,7 @@ public class AddCaselloPageController implements Initializable {
 				e.printStackTrace();
 				System.out.println("Errore nel caricamento sul DB");
 				messaggiVari.setText("Inserire valore numerico in 'Altezza Casello'");
+				JOptionPane.showMessageDialog(null, "Errore aggiunta casello, riprova!");
 			}
 				
 			}
