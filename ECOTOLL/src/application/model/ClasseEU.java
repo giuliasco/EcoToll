@@ -8,6 +8,14 @@ public class ClasseEU {
 	private double aggiunta;
 	private String tipo;
 	
+	 private static ClasseEU instance = null;
+		
+	    public static ClasseEU getIstance() {
+	        if(instance==null)
+	                instance = new ClasseEU();
+	        return instance;
+	}
+	
 	public ClasseEU() {}
 	
 	public ClasseEU(int id,int id_normativa,double aggiunta,String tipo) {
@@ -36,5 +44,8 @@ public class ClasseEU {
 	public String getTipo() {return tipo;}
 	public void setTipo(String tipo) {this.tipo=tipo;}
 
+	 public void setglobal(ClasseEU classeEu) {
+	    	instance = classeEu;
+	    }
 
 }

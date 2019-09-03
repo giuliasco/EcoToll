@@ -9,7 +9,7 @@ import application.model.ClasseEU;
 	
 	public List<ClasseEU> getAllClasseEU();
 	
-	public ClasseEU getClasseEU(ClasseEU eu);
+	public ClasseEU getClasseEU(int id);
 			
 
 }

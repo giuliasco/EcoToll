@@ -43,7 +43,7 @@ public class RegistrationPageControll {
 				((Node)evt.getSource()).getScene().getWindow().hide(); 
 		       	Stage primaryStage = new Stage();
 		       	FXMLLoader loader = new FXMLLoader();
-		       	Pane root=loader.load(getClass().getResource("/application/front/fxml/UserPage.fxml").openStream());
+		       	Pane root=loader.load(getClass().getResource("/application/front/fxml/Pedaggio.fxml").openStream());
 		       	Scene scene = new Scene(root);          
 		       	primaryStage.setScene(scene);
 		       	primaryStage.show();

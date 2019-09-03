@@ -56,17 +56,17 @@
             <Font name="Courier New Bold" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="targa" layoutX="189.0" layoutY="244.0" promptText="Ex : AA111AA">
+      <TextField fx:id="targa" layoutX="187.0" layoutY="234.0" promptText="Ex : AA111AA">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </TextField>
-      <Label layoutX="231.0" layoutY="210.0" text="Targa Veicolo">
+      <Label layoutX="237.0" layoutY="197.0" text="Targa Veicolo">
          <font>
             <Font name="Courier New Bold" size="17.0" />
          </font>
       </Label>
-      <Button fx:id="bottonePedaggio" layoutX="481.0" layoutY="241.0" mnemonicParsing="false" onAction="#calcolaPedaggio" prefHeight="43.0" prefWidth="123.0" text="Calcola Pedaggio" textFill="#36bb74">
+      <Button fx:id="bottonePedaggio" layoutX="480.0" layoutY="227.0" mnemonicParsing="false" onAction="#calcolaPedaggio" prefHeight="43.0" prefWidth="123.0" text="Calcola Pedaggio" textFill="#36bb74">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -85,6 +85,32 @@
          <effect>
             <InnerShadow />
          </effect></Button>
+      <Label layoutX="174.0" layoutY="279.0" prefHeight="21.0" prefWidth="300.0">
+         <font>
+            <Font name="Courier New Bold" size="17.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.04126986549014133">
+               <stops>
+                  <Stop color="#f5a51a" />
+                  <Stop color="#ff2323" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label fx:id="avvisiVari" layoutX="169.0" layoutY="285.0" prefHeight="21.0" prefWidth="300.0">
+         <font>
+            <Font name="Courier New Bold" size="17.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.04126986549014133">
+               <stops>
+                  <Stop color="#f5a51a" />
+                  <Stop color="#ff2323" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
    </children>
    <effect>
       <InnerShadow />

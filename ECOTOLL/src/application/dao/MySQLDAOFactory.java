@@ -13,10 +13,11 @@ public class MySQLDAOFactory extends DAOFactory {
 	
 	//public static final String DRIVER = "com.mysql.jdbc.Driver";
 	//public static final String DBURL = "jdbc:mysql://localhost:3306/ecotoll";
-	public static final String dbName = "ecotoll";
+	public static final String dbName = "EcoToll";
 	public static final String userName = "root";
-	public static final String password="PasswordErrata2019";
-	 public static Connection createConnection() {
+	public static final String password="C4neT0by$";
+	 
+	public static Connection createConnection() {
 	        Connection conn = null;
 	        try {
 	            Class.forName("com.mysql.jdbc.Driver");
@@ -28,6 +29,9 @@ public class MySQLDAOFactory extends DAOFactory {
 	        }
 	        return conn;
 	    } 
+	 
+	 
+	 
 	 
 	 public static void closeDbConnection(ResultSet rs,  Statement stmt,  Connection conn){
 		 
@@ -46,22 +50,38 @@ public class MySQLDAOFactory extends DAOFactory {
 	        }
 	    }
 
-	@Override
-	public DAOAutostrada getDAOAutostrada() {return new MySqlDAOAutostradaDAOimpl();}
-	@Override
-	public DAOCasello getDAOCasello() {return new MySqlDAOCaselloDAOimpl();}
-	@Override
-	public DAOClasseEU getDAOClasseEU() {return new MySqlDAOClasseEUDAOimpl();}
-	@Override
-	public DAOClasseIT getDAOClasseIT() {return new MySqlDAOClasseITDAOimpl();}
-	@Override
-	public DAONormativa getDAONormativa() {return new MySqlDAONormativaDAOimpl();}
-	@Override
-	public DAORuolo getDAORuolo() {return new MySqlDAORuoloDAOimpl();}
-	@Override
-	public DAOUtente getDAOUtente() {return new MySqlDAOUtenteDAOimpl();}
-	@Override
-	public DAOVeicolo getDAOVeicolo() {return new MySqlDAOVeicoloDAOimpl();}
+	
+	 @Override
+	
+	 public DAOAutostrada getDAOAutostrada() {return new MySqlDAOAutostradaDAOimpl();}
+	
+	 @Override
+	
+	 public DAOCasello getDAOCasello() {return new MySqlDAOCaselloDAOimpl();}
+	
+	 @Override
+	
+	 public DAOClasseEU getDAOClasseEU() {return new MySqlDAOClasseEUDAOimpl();}
+	
+	 @Override
+	
+	 public DAOClasseIT getDAOClasseIT() {return new MySqlDAOClasseITDAOimpl();}
+	
+	 @Override
+	
+	 public DAONormativa getDAONormativa() {return new MySqlDAONormativaDAOimpl();}
+	
+	 @Override
+	
+	 public DAORuolo getDAORuolo() {return new MySqlDAORuoloDAOimpl();}
+	
+	 @Override
+	
+	 public DAOUtente getDAOUtente() {return new MySqlDAOUtenteDAOimpl();}
+	
+	 @Override
+	
+	 public DAOVeicolo getDAOVeicolo() {return new MySqlDAOVeicoloDAOimpl();}
 	
 	
 

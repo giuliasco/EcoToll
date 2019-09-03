@@ -6,12 +6,14 @@ import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import application.controller.CaselloController;
+import application.controller.ClasseEuController;
 import application.controller.ClasseItController;
 import application.controller.NormativaController;
 import application.controller.UtenteController;
 import application.controller.VeicoloController;
 import application.controller.AutostradaController;
 import application.model.Casello;
+import application.model.ClasseEU;
 import application.model.ClasseIT;
 import application.model.Normativa;
 import application.model.Utente;
@@ -41,6 +43,7 @@ public class PedaggioPageController implements Initializable{
 	@FXML private Button logout;
 	@FXML private Button bottonePedaggio;
 	@FXML private Label labelBenvenuto;
+	@FXML private Label avvisiVari;
 	@FXML private Button indietro;
 	
 
@@ -54,6 +57,7 @@ public class PedaggioPageController implements Initializable{
 	private CaselloController caselloController = new CaselloController();
 	private VeicoloController veicoloController = new VeicoloController();
 	private ClasseItController classeItController = new ClasseItController();
+	private ClasseEuController classeEuController = new ClasseEuController();
 	private AutostradaController autostradaController = new AutostradaController();
 	
 	
@@ -133,13 +137,14 @@ public class PedaggioPageController implements Initializable{
 		Casello partenza = Casello.getIstance();
 		caselloController.setCaselloGlobalByName(a);
 		Casello arrivo = Casello.getIstance();
-		System.out.println("la partenza =" + partenza.getNomeCasello() + partenza.getAltezzaKm() + "L'Arrivo =" + arrivo.getNomeCasello()+ arrivo.getAltezzaKm());
 		if (partenza.getIdAutostrada() != arrivo.getIdAutostrada()) {
 			System.out.println("Non sono sulla stessa autostrada");
+			avvisiVari.setText("inserire caselli della stessa autostrada.");
 		}else {
 			if(!targa.getText().isEmpty()) {
 				if(veicoloController.veicoloPresente(targa.getText().toUpperCase())) {
 					String nome="italiana";
+					String nomeA="europea";
 					String nomeNorm = n.getNomeNormativa();
 					System.out.println(nome + nomeNorm);
 					if (nomeNorm.equalsIgnoreCase(nome)) {
@@ -150,6 +155,9 @@ public class PedaggioPageController implements Initializable{
 						autostradaController.setAutostradaGlobalbyID(partenza.getIdAutostrada());
 						Autostrada aut = Autostrada.getInstance();
 						double pedaggio=(Math.round(((Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm() + (22*(Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm())/100 + ci.getAggiunta())*10))/10.0;
+						String totale=Double.toString(pedaggio);
+						totalePedaggio.setText(totale + "  euro");
+						
 						/*PASSAGGI CHE ABBIAMO INIZIALMENTE UTILIZZATO PER ARRIVARE A CALCOLARE IL PARAMETRO PEDAGGIO
 						 * double altezza_p= partenza.getAltezzaKm();
 						//double altezza_a=arrivo.getAltezzaKm();
@@ -158,12 +166,24 @@ public class PedaggioPageController implements Initializable{
 						//double tariffa_km = aut.getTariffaKm();
 						//double prezzo = (Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm();
 						double percentuale = (22*(Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm())/100;*/
-						String totale=Double.toString(pedaggio);
-						totalePedaggio.setText(totale + "  euro");
-				}else {
-					System.out.println("Errore");
+						
+				}else if (nomeNorm.equalsIgnoreCase(nomeA)) {
+					veicoloController.setVeicolorGlobal(targa.getText());
+					Veicolo v = Veicolo.getIstance();
+					classeEuController.setClasseEUGlobal(v.getIdCeu());
+					ClasseEU ceu = ClasseEU.getIstance();
+					autostradaController.setAutostradaGlobalbyID(partenza.getIdAutostrada());
+					Autostrada aut = Autostrada.getInstance();
+					double pedaggio=(Math.round(((Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm() + (22*(Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm())/100 + ceu.getAggiunta())*10))/10.0;
+					String totale=Double.toString(pedaggio);
+					totalePedaggio.setText(totale + "  euro");
+					
 				}
-			}
+			}else {
+				avvisiVari.setText("Targa non corretta o incompleta.");
+				}
+			}else {
+				avvisiVari.setText("inserire la targa.");
 			}
 		}
 		}

@@ -46,20 +46,23 @@ public class MySqlDAOClasseEUDAOimpl implements DAOClasseEU {
 
 
 	@Override
-	public ClasseEU getClasseEU(ClasseEU eu) {
+	public ClasseEU getClasseEU(int id) {
 		try {
 			  con = MySQLDAOFactory.createConnection();
 			  prep = (PreparedStatement) con.prepareStatement(SELECT_CLASSEUFROMIDNORMATIVA);
-			  prep.setInt(1, eu.getIdNormativa());
+			  prep.setInt(1, id);
 			  res = prep.executeQuery();
-			  if(res.next()) {
-				  return new ClasseEU(res);
-			  }
+			  res.next();
+			  ClasseEU ceu=new ClasseEU(res);
+			  ClasseEU ceu1= ClasseEU.getIstance();
+			  ceu1.setglobal(ceu);
+			  return ceu1;
 		}catch (SQLException e) {
 		e.printStackTrace(); 
 		System.out.println("Problema nel DB");
-		}
 		return null;
+		}
+		
 	}
 
 }
