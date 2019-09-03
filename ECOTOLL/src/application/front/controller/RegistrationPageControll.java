@@ -51,7 +51,7 @@ public class RegistrationPageControll {
 		       	System.out.println("Utente registrato");
 				}
 			}else {
-				giaPresente.setText("Utente gia'  presente");
+				giaPresente.setText("Utente gia' presente");
 				nome.setText("");
 				cognome.setText("");
 				email.setText("");
