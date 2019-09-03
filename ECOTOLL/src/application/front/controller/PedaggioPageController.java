@@ -5,6 +5,8 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import application.controller.CaselloController;
 import application.controller.ClasseEuController;
 import application.controller.ClasseItController;
@@ -87,7 +89,7 @@ public class PedaggioPageController implements Initializable{
 	
 	
 	 @FXML 
-	  public void logout (ActionEvent evt){
+	  public void logout (ActionEvent evt) throws IOException{
 		try {
 			((Node)evt.getSource()).getScene().getWindow().hide(); 
 			Stage primaryStage = new Stage();
@@ -97,13 +99,14 @@ public class PedaggioPageController implements Initializable{
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		}catch(Exception e){
-			System.out.println("Errore");
+			System.out.println("Errore logout");
+			e.printStackTrace();
 			}
 		}
 	 
 	 
 	 @FXML 
-	  public void indietro (ActionEvent evt){
+	  public void indietro (ActionEvent evt) throws IOException{
 		try {
 			((Node)evt.getSource()).getScene().getWindow().hide(); 
 			Stage primaryStage = new Stage();
@@ -113,7 +116,8 @@ public class PedaggioPageController implements Initializable{
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		}catch(Exception e){
-			System.out.println("Errore");
+			System.out.println("Errore indietro");
+			e.printStackTrace();
 			}
 		}
 
@@ -130,7 +134,8 @@ public class PedaggioPageController implements Initializable{
 
 	
 	@FXML
-	public void calcolaPedaggio (ActionEvent evt){
+	public void calcolaPedaggio (ActionEvent evt) throws IOException{
+	try {
 		String p = partenza.getValue().toString();
 		String a = arrivo.getValue().toString();
 		caselloController.setCaselloGlobalByName(p);
@@ -139,7 +144,7 @@ public class PedaggioPageController implements Initializable{
 		Casello arrivo = Casello.getIstance();
 		if (partenza.getIdAutostrada() != arrivo.getIdAutostrada()) {
 			System.out.println("Non sono sulla stessa autostrada");
-			avvisiVari.setText("inserire caselli della stessa autostrada.");
+			avvisiVari.setText("Inserire caselli della stessa autostrada.");
 		}else {
 			if(!targa.getText().isEmpty()) {
 				if(veicoloController.veicoloPresente(targa.getText().toUpperCase())) {
@@ -157,6 +162,7 @@ public class PedaggioPageController implements Initializable{
 						double pedaggio=(Math.round(((Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm() + (22*(Math.abs(arrivo.getAltezzaKm() - partenza.getAltezzaKm()))*aut.getTariffaKm())/100 + ci.getAggiunta())*10))/10.0;
 						String totale=Double.toString(pedaggio);
 						totalePedaggio.setText(totale + "  euro");
+						avvisiVari.setText("");
 						
 						/*PASSAGGI CHE ABBIAMO INIZIALMENTE UTILIZZATO PER ARRIVARE A CALCOLARE IL PARAMETRO PEDAGGIO
 						 * double altezza_p= partenza.getAltezzaKm();
@@ -187,6 +193,12 @@ public class PedaggioPageController implements Initializable{
 			}
 		}
 		}
+	catch (Exception e) {
+		e.printStackTrace();
+		System.out.println("Errore calcolo pedaggio");
+		JOptionPane.showMessageDialog(null, "Errore nel calcolo del pedaggio!");
+		}
+	}
 	
 }
 

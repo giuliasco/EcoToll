@@ -59,6 +59,7 @@ public class RegistrationPageControll {
 			}}
 		  catch (Exception e) {
 			  System.out.println("Errore");
+			  e.printStackTrace();
 		  }
 		
 	}
@@ -75,6 +76,7 @@ public class RegistrationPageControll {
 		  }
 		  catch (Exception e) {
 			  System.out.println("Errore");
+			  e.printStackTrace();
 		  }
 	  }
 
@@ -90,6 +92,7 @@ public class RegistrationPageControll {
 				primaryStage.show();
 			}catch(Exception e){
 				System.out.println("Errore");
+				e.printStackTrace();
 				}
 	  }
 

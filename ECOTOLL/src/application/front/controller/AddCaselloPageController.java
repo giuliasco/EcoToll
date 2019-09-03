@@ -57,7 +57,7 @@ public class AddCaselloPageController implements Initializable {
 		
 
 		@FXML
-		public void getComboAutostrada(ActionEvent evt)  {
+		public void getComboAutostrada(ActionEvent evt) throws IOException {
 			try{
 				autostradaselezionata=autostrada.getValue();
 			}catch(Exception e){
@@ -110,7 +110,7 @@ public class AddCaselloPageController implements Initializable {
 				e.printStackTrace();
 				System.out.println("Errore nel caricamento sul DB");
 				messaggiVari.setText("Inserire valore numerico in 'Altezza Casello'");
-				JOptionPane.showMessageDialog(null, "Errore aggiunta casello, riprova!");
+				//JOptionPane.showMessageDialog(null, "Errore aggiunta casello, riprova!");
 			}
 				
 			}

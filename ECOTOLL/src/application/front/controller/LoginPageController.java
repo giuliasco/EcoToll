@@ -28,20 +28,24 @@ public class LoginPageController{
   
   @FXML
      public void Registrazione (ActionEvent actionEvent) throws IOException 
-      {      
+      {  try {    
         ((Node)actionEvent.getSource()).getScene().getWindow().hide(); 
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader();
         Pane root=loader.load(getClass().getResource("/application/front/fxml/Registration.fxml").openStream());
         Scene scene = new Scene(root);        
         primaryStage.setScene(scene);
-        primaryStage.show();    
+        primaryStage.show();  }
+      catch (Exception e) {
+    	  e.printStackTrace();
+    	  System.out.println("Errore Apertura Registrazione");
+      }
     } 
   
   
   @FXML
   public void login (ActionEvent evt) throws IOException {
-	  
+	  try {	  
       
     if(loginManager.login(email.getText(), password.getText())) {  
       
@@ -69,7 +73,11 @@ public class LoginPageController{
     		System.out.println("User");
     		}
     }else { 
-    	labelErrore.setText("Email o password errate");}
+    	labelErrore.setText("Email o password errate");}}
+	  catch (Exception e) {
+		  e.printStackTrace();
+		  System.out.println("Errore login!");
+	  }
   }
   
  

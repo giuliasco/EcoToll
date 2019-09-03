@@ -8,38 +8,49 @@
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="665.0" style="-fx-background-color: #2376AD;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.AdminPagePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="665.0" style="-fx-background-color: #2376AD;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.front.controller.AdminPagePageController">
    <children>
-      <Label layoutX="27.0" layoutY="28.0" prefHeight="27.0" prefWidth="331.0" text="PANNELLO AMMINISTRATORE">
+      <Label layoutX="27.0" layoutY="28.0" prefHeight="29.0" prefWidth="348.0" text="PANNELLO AMMINISTRATORE" textFill="#ef7100">
          <font>
-            <Font name="Courier New Bold Italic" size="21.0" />
+            <Font name="Arial Black" size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
-         <textFill>
-            <LinearGradient endX="1.0" endY="0.04126986549014133">
-               <stops>
-                  <Stop color="#f5a51a" />
-                  <Stop color="#d35b5b" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
       </Label>
-      <Label layoutX="44.0" layoutY="154.0" text="Normativa corrente:" />
+      <Label layoutX="44.0" layoutY="154.0" text="Normativa corrente:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <Label fx:id="normativaCorrente" layoutX="184.0" layoutY="154.0" prefHeight="17.0" prefWidth="134.0" textFill="#302525">
          <effect>
-            <InnerShadow blurType="GAUSSIAN" choke="0.38" color="#ff1a1a" />
+            <InnerShadow blurType="GAUSSIAN" choke="0.38" color="#f3f3f3" />
          </effect>
       </Label>
-      <Button fx:id="bottoneAggiornaNormativa" layoutX="130.0" layoutY="227.0" mnemonicParsing="false" onAction="#aggiornaNormativa" text="Aggiorna" />
+      <Button fx:id="bottoneAggiornaNormativa" layoutX="96.0" layoutY="227.0" mnemonicParsing="false" onAction="#aggiornaNormativa" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #EF7100;" text="AGGIORNA" textFill="WHITE">
+         <effect>
+            <InnerShadow />
+         </effect>
+         <font>
+            <Font name="Arial Black" size="11.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <ComboBox fx:id="normativeDisponibili" layoutX="193.0" layoutY="187.0" prefHeight="26.0" prefWidth="123.0" promptText="Normative Disponibili" />
       <ComboBox fx:id="caselli" layoutX="368.0" layoutY="149.0" prefWidth="150.0" promptText="Scegli casello" />
-      <Button fx:id="bottoneEliminaCasello" layoutX="533.0" layoutY="150.0" mnemonicParsing="false" onAction="#eliminaCasello" text="Elimina Casello" />
+      <Button fx:id="bottoneEliminaCasello" layoutX="533.0" layoutY="150.0" mnemonicParsing="false" onAction="#eliminaCasello" style="-fx-background-color: #FFFFFF;" text="Elimina Casello" textFill="#ec1111">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Label layoutX="437.0" layoutY="93.0" text="ELIMINA CASELLO" textFill="WHITE">
          <font>
             <Font name="System Bold" size="17.0" />
@@ -57,34 +68,40 @@
          </effect>
       </Label>
       <Separator layoutX="333.0" layoutY="63.0" orientation="VERTICAL" prefHeight="200.0" />
-      <Button fx:id="bottoneCalcolaPedaggio" layoutX="217.0" layoutY="310.0" mnemonicParsing="false" onAction="#openPedaggio" prefHeight="59.0" prefWidth="236.0" text="Calcola Pedaggio" textFill="#41d664">
+      <Button fx:id="bottoneCalcolaPedaggio" layoutX="217.0" layoutY="310.0" mnemonicParsing="false" onAction="#openPedaggio" prefHeight="59.0" prefWidth="236.0" style="-fx-background-color: #EF7100;" text="CALCOLA PEDAGGIO" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Arial Black" size="18.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Button fx:id="bottoneAggiungiCasello" layoutX="443.0" layoutY="218.0" mnemonicParsing="false" onAction="#openAddCasello" prefHeight="44.0" prefWidth="123.0" text="Aggiungi casello" textFill="#266f37">
+      <Button fx:id="bottoneAggiungiCasello" layoutX="437.0" layoutY="210.0" mnemonicParsing="false" onAction="#openAddCasello" prefHeight="44.0" prefWidth="170.0" style="-fx-background-color: #FFFFFF;" text="AGGIUNGI CASELLO" textFill="#04bd41">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Arial Black" size="12.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Button fx:id="bottoneLogout" layoutX="575.0" layoutY="15.0" mnemonicParsing="false" onAction="#logout" prefHeight="44.0" prefWidth="73.0" style="-fx-background-color: #EF7100;" text="LOGOUT">
+      <Button fx:id="bottoneLogout" layoutX="575.0" layoutY="15.0" mnemonicParsing="false" onAction="#logout" prefHeight="44.0" prefWidth="73.0" style="-fx-background-color: #EF7100;" text="LOGOUT" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="10.0" />
          </font>
          <effect>
             <InnerShadow />
          </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Label fx:id="labelBenvenuto" layoutX="398.0" layoutY="33.0" prefHeight="21.0" prefWidth="150.0">
-         <effect>
-            <InnerShadow blurType="GAUSSIAN" choke="0.38" color="#010101" />
-         </effect>
+      <Label fx:id="labelBenvenuto" layoutX="398.0" layoutY="33.0" prefHeight="21.0" prefWidth="150.0" textFill="#f2ea00">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
